@@ -31,10 +31,3 @@ while True:
     print("Amount Charges:"+str(amount_charge))
     print("surcharge amount:"+str(surcharge))
     print("Net Amount Paid by the customer:"+str(bill))
-
-
-
-
-        
-            
-

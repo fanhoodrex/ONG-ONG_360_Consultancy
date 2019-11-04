@@ -26,4 +26,3 @@ while True:
         print('C')
     else:
         print('F')
-

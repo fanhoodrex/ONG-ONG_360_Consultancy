@@ -42,8 +42,3 @@ elif day in day_list[5:]:
     if amount > 40:
         amount = 40
     print(f"Duration: {hour} Hours {minute} Minutes \n Net Amount Needed To Paid: {amount}")
-    
-        
-        
-
-
