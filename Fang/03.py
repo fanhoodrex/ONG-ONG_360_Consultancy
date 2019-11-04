@@ -24,10 +24,4 @@ while True:
         surcharge = unit_elec * 2  * 0.15
         bill = int(unit_elec * 2  * 1.15)
 
-    print("\n")
-    print("Customer_Name:" + str(cus_name))
-    print("unit Consumed:"+str(unit_elec))
-    print('\n')
-    print("Amount Charges:"+str(amount_charge))
-    print("surcharge amount:"+str(surcharge))
-    print("Net Amount Paid by the customer:"+str(bill))
+    print(f"Customer_Name:{cus_name}\nunit Consumed:{unit_elec}\n\nAmount Charges:{amount_charge}\nSurcharge Amount:{surcharge}\nNet Amount Paid by the customer:{bill}")
