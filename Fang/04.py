@@ -6,7 +6,6 @@ Created on Fri Nov  1 12:37:02 2019
 """
 day_list = [i+1 for i in range(7)]
 
-
 def weekday(): 
     """calcualte the price based on duration"""
     if hour == 0 and minute < 15: 
@@ -30,7 +29,7 @@ def weekend():
     else:
         amount = 5 + 2*(hour - 2)
     if minute > 5: # tolerate 5 minutes & calculate price based on minute
-        amount += 1
+        amount += 2
     else:
         pass
     return amount
