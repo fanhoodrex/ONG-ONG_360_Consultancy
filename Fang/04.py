@@ -14,31 +14,29 @@ def weekday():
             amount = 0 #Exit Within 5 minutes are free
         else:
             amount = 3
-    elif 0 < hour <= 3:
+    elif 0 < hour < 3:
         amount = 3
     else:
-        amount = hour 
-    if hour != 0 and minute > 5: # tolerate 5 minutes & calculate price based on minute
-        amount += 1
-    else:
-        pass
+        if minute <= 5:
+            amount = hour
+        else:
+            amount = hour + 1
     return amount
 
 def weekend(): 
     """calcualte the price based on duration"""
     if hour == 0:
-        if minute <= 15: 
-            amount = 0 #Exit Within 15 minutes are free
+        if minute <= 15:
+            amount = 0 #Exit Within 5 minutes are free
         else:
             amount = 5
-    elif 0 < hour <= 2:
+    elif 0 < hour < 2:
         amount = 5
     else:
-        amount = 5 + 2*(hour - 2)
-    if hour != 0 and minute > 5: # tolerate 5 minutes & calculate price based on minute
-        amount += 2
-    else:
-        pass
+        if minute <= 5:
+            amount = 5
+        else:
+            amount = 3 + 2*hour  
     return amount
 
 while True:
