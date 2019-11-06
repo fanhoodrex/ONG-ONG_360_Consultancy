@@ -9,12 +9,15 @@ day_list = [i+1 for i in range(7)]
 
 def weekday(): 
     """calcualte the price based on duration"""
-    if hour == 0 and minute <= 15: 
-        amount = 0 #Exit Within 5 minutes are free
+    if hour == 0:
+        if minute <= 15:
+            amount = 0 #Exit Within 5 minutes are free
+        else:
+            amount = 3
     elif 0 < hour <= 3:
         amount = 3
     else:
-        amount = hour
+        amount = hour 
     if hour != 0 and minute > 5: # tolerate 5 minutes & calculate price based on minute
         amount += 1
     else:
@@ -23,8 +26,11 @@ def weekday():
 
 def weekend(): 
     """calcualte the price based on duration"""
-    if hour == 0 and minute <= 15: 
-        amount = 0 #Exit Within 15 minutes are free
+    if hour == 0:
+        if minute <= 15: 
+            amount = 0 #Exit Within 15 minutes are free
+        else:
+            amount = 5
     elif 0 < hour <= 2:
         amount = 5
     else:
@@ -35,9 +41,8 @@ def weekend():
         pass
     return amount
 
-
 while True:
-    day = float(int(input("Enter the day:")))
+    day = float(input("Enter the day:"))
     duration = input("Enter the Duration:")
 
     hour = int(duration.split(":")[0]) # slice out the hour part
