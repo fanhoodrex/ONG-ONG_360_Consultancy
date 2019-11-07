@@ -6,7 +6,7 @@ Created on Fri Nov  1 12:37:02 2019
 """
 import time
 
-day_list = [i+1 for i in range(7)]
+day_list = list(range(1,8))
 
 def day_input_eva():
     while True:        
@@ -49,7 +49,7 @@ def time_input_eva():
 def weekday(): 
     """calcualte the price based on duration"""
     if hour == 0:
-        if minute <= 15:
+        if minute <= 10:
             amount = 0 #Exit Within 5 minutes are free
         else:
             amount = 3
@@ -59,13 +59,13 @@ def weekday():
         if minute <= 5:
             amount = hour
         else:
-            amount = hour + 1
+            amount = hour + 1.5
     return amount
 
 def weekend(): 
     """calcualte the price based on duration"""
     if hour == 0:
-        if minute <= 15:
+        if minute <= 10:
             amount = 0 #Exit Within 5 minutes are free
         else:
             amount = 5
