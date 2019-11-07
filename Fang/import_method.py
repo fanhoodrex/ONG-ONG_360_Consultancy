@@ -1,50 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Nov  1 12:37:02 2019
-
-@author: Zac_Fang
-"""
 import time
+from day_input import day_input_eva
+from time_input import time_input_eva
 
 day_list = [i+1 for i in range(7)]
-
-def day_input_eva():
-    while True:        
-        try:
-            day = int(input("Enter the day number between 1-7:")) # string
-            if day != int and day not in day_list: # condition on type 
-                print("input is out of day_list scope")
-                time.sleep(1.5)
-                continue
-            else:
-                break
-        except ValueError:
-            print("pls enter correct integer number")
-            time.sleep(1.5)
-            continue
-    return day
-
-def time_input_eva():
-    while True:
-        try:
-            duration = input("Enter the Duration:")
-            hour = int(duration.split(":")[0]) # slice out the hour part
-            minute = int(duration.split(":")[1]) # slice out the minute part
-            if type(hour) != int or type(minute) != int : # condition on type 
-                print("pls enter correct format.....")
-                time.sleep(1.5)
-                continue
-            else:
-                break
-        except ValueError:
-            print("ValueError,pls enter correct integer format......")
-            time.sleep(1.5)
-            continue
-        except IndexError:
-            print("IndexError,pls enter (Hours:Minutes HH:MM format)......")
-            time.sleep(1.5)
-            continue
-    return hour,minute
 
 def weekday(): 
     """calcualte the price based on duration"""
