@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 import time
-
 day_list = list(range(1,8))
 enter_count = 1
-
 def day_input_eva():
     "this function is mainly for validating user's input on day chosen "
     global enter_count
@@ -24,7 +21,6 @@ def day_input_eva():
             enter_count += 1 
             continue
     return day
-
 def time_input_eva():
     "this function is mainly for validating user's input on duration chosen"
     while True:
@@ -51,7 +47,6 @@ def time_input_eva():
             time.sleep(1.5)
             continue
     return hour,minute
-
 def week(*args): # enter the how many day are considered as weekday,return as tuple
     "calculate the amount based on the date and hours"
     def inner(fir_hours,fir_charge,sub_charge,min_free,tol_min):
@@ -79,7 +74,6 @@ def week(*args): # enter the how many day are considered as weekday,return as tu
         if amount > 40:
             amount = 40.00
     return amount
-
 #below is the main function 
 while True:
     day = day_input_eva()
@@ -87,8 +81,3 @@ while True:
     amount = 0.0 #initiative the amount
     amount = week(1,2,3,4,5)
     print(f"Duration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
-
-
-
-a = list(range(1,11))
-b = ["一","二","三","四","五","六","七"]
