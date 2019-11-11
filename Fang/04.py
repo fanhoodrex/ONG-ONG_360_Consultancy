@@ -1,6 +1,17 @@
 import time
 day_list = list(range(1,8))
 enter_count = 1
+# define the price dictionary for each different day
+price_dict = {
+    1:[3,3,1,15,5],
+    2:[3,3,1,15,5],
+    3:[3,3,1,15,5],
+    4:[3,3,1,15,5],
+    5:[3,3,1,15,5],
+    6:[2,5,2,15,5],
+    7:[2,5,2,15,5],
+}
+
 def day_input_eva():
     "this function is mainly for validating user's input on day chosen "
     global enter_count
@@ -21,6 +32,7 @@ def day_input_eva():
             enter_count += 1 
             continue
     return day
+
 def time_input_eva():
     "this function is mainly for validating user's input on duration chosen"
     while True:
@@ -47,29 +59,37 @@ def time_input_eva():
             time.sleep(1.5)
             continue
     return hour,minute
+
 def week(*args): # enter the how many day are considered as weekday,return as tuple
-    "calculate the amount based on the date and hours"
-    def inner(fir_hours,fir_charge,sub_charge,min_free,tol_min):
+    "outer function that return the amount value"
+    def inner(day):
+        """inner function that calculate the amount based on the date and hours"""
+        fir_hours = price_dict[day][0] #get the first hour amount from dictionary
+        fir_charge = price_dict[day][1] #get the first charge amount from dictionary
+        sub_charge = price_dict[day][2] #get the subsequent charge amount from dictionary
+        min_free = price_dict[day][3] #get the minimum minutes free from dictionary
+        tol_min = price_dict[day][4] #get the tolerate minutes from dictionary
+        
         if 0 <= hour < fir_hours:
             amount = fir_charge
             if hour == 0 and minute <= min_free: #within minutes are free
                 amount = 0 
         else:
             # expression amount = 5 + (hour-2)*2 + 2
-            amount = fir_charge + (hour-fir_hours) * sub_charge
+            amount = fir_charge + (hour - fir_hours) * sub_charge
             if minute > tol_min:
-                amount -= sub_charge            
+                amount += sub_charge            
         return amount
     # if the day user enter is on weekday or weekend 
     if day in args:
         print("\nHello Weekday")
-        amount = inner(3,3,1,15,5)
+        amount = inner(day)
         # the order of parameters is fir_hours,fir_charge,sub_charge,min_free,tol_min
         if amount > 20:
             amount = 20.00
     else:
         print("\nHello Weekend")
-        amount = inner(2,5,2,15,5)
+        amount = inner(day)
         # the order of parameters is fir_hours,fir_charge,sub_charge,min_free,tol_min
         if amount > 40:
             amount = 40.00
