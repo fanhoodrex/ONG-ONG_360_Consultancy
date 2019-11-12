@@ -3,13 +3,13 @@ day_list = list(range(1,8))
 enter_count = 1
 # define the price dictionary for each different day
 price_dict = {
-    1:[3,3,1,15,5],
-    2:[3,3,1,15,5],
-    3:[3,0,1,15,5], # requirement change as first 3 hour cost 0 RM 
-    4:[3,3,1,15,5],
-    5:[3,3,1,15,5],
-    6:[2,5,2,15,5],
-    7:[2,5,2,15,5],
+    1:[3,3,1,15,5,20],
+    2:[3,3,1,15,5,20],
+    3:[3,0,1,15,5,20], # requirement change as first 3 hour cost 0 RM 
+    4:[3,3,1,15,5,20],
+    5:[3,3,1,15,5,20],
+    6:[2,5,2,15,5,40],
+    7:[2,5,2,15,5,40],
 }
 
 def day_input_eva():
@@ -60,7 +60,7 @@ def time_input_eva():
             continue
     return hour,minute
 
-def week(*args): # enter the how many day are considered as weekday,return as tuple
+def week(): # enter the how many day are considered as weekday,return as tuple
     "outer function that return the amount value"
     def inner(day):
         """inner function that calculate the amount based on the date and hours"""
@@ -69,7 +69,7 @@ def week(*args): # enter the how many day are considered as weekday,return as tu
         sub_charge = price_dict[day][2] #get the subsequent charge amount from dictionary
         min_free = price_dict[day][3] #get the minimum minutes free from dictionary
         tol_min = price_dict[day][4] #get the tolerate minutes from dictionary
-        
+
         if 0 <= hour < fir_hours:
             amount = fir_charge
             if hour == 0 and minute <= min_free: #within minutes are free
@@ -80,24 +80,17 @@ def week(*args): # enter the how many day are considered as weekday,return as tu
             if minute > tol_min:
                 amount += sub_charge            
         return amount
-    # if the day user enter is on weekday or weekend 
-    if day in args:
-        print("\nHello Weekday")
-        amount = inner(day)
+
+    amount = inner(day)
         # the order of parameters is fir_hours,fir_charge,sub_charge,min_free,tol_min
-        if amount > 20:
-            amount = 20.00
-    else:
-        print("\nHello Weekend")
-        amount = inner(day)
-        # the order of parameters is fir_hours,fir_charge,sub_charge,min_free,tol_min
-        if amount > 40:
-            amount = 40.00
+    if amount > max_charge:
+        amount = max_charge
     return amount
+    
 #below is the main function 
 while True:
     day = day_input_eva()
+    max_charge = price_dict[day][-1]
     hour,minute = time_input_eva()
-    amount = 0.0 #initiative the amount
-    amount = week(1,2,3,4,5)
+    amount = week()
     print(f"Duration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
