@@ -90,7 +90,7 @@ def week(): # enter the how many day are considered as weekday,return as tuple
 #below is the main function 
 while True:
     day = day_input_eva()
-    max_charge = price_dict[day][-1]
+    max_charge = price_dict[day][-1] # get the maximum charge from the price dictionary
     hour,minute = time_input_eva()
     amount = week()
     print(f"Duration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
