@@ -94,3 +94,5 @@ while True:
     hour,minute = time_input_eva()
     amount = week()
     print(f"Duration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
+
+

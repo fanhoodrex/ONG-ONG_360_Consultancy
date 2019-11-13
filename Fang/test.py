@@ -2,13 +2,13 @@ import time
 # define the price dictionary for each different day
 # [ first 3 hour , RM3, Subsequent hour 1 , Exit 15 mins are free , Tolerate 5 min,Max charge RM]
 price_dict = {
-    1:[3,3,1,15,5,20],
-    2:[3,3,1,15,5,20],
-    3:[3,0,1,15,5,20], # requirement change as first 3 hour cost 0 RM 
-    4:[3,3,1,15,5,20],
-    5:[3,3,1,15,5,20],
-    6:[2,5,2,15,5,40],
-    7:[2,5,2,15,5,40],
+    1:[3,3,60,1,15,5,20],
+    2:[3,3,60,1,15,5,20],
+    3:[3,3,30,1,15,5,20], # requirement change as first 3 hour cost 0 RM 
+    4:[3,3,60,1,15,5,20],
+    5:[3,3,60,1,15,5,20],
+    6:[2,5,120,2,15,5,40],
+    7:[2,5,120,2,15,5,40],
 }
 
 def day_input_eva():
@@ -63,19 +63,22 @@ def week(): # enter the how many day are considered as weekday,return as tuple
         """inner function that calculate the amount based on the date and hours"""
         fir_hours = price_dict[day][0] #get the first hour amount from dictionary
         fir_charge = price_dict[day][1] #get the first charge amount from dictionary
-        sub_charge = price_dict[day][2] #get the subsequent charge amount from dictionary
-        min_free = price_dict[day][3] #get the minimum minutes free from dictionary
-        tol_min = price_dict[day][4] #get the tolerate minutes from dictionary
+        sub_min = price_dict[day][2]
+        sub_charge = price_dict[day][3] #get the subsequent charge amount from dictionary
+        min_free = price_dict[day][4] #get the minimum minutes free from dictionary
+        tol_min = price_dict[day][5] #get the tolerate minutes from dictionary
 
-        if 0 <= (total_minutes//60) < fir_hours: # first few hours free
+        # between the 0 hour and first 3 hour
+        if 0 <= hour < fir_hours:
             amount = fir_charge
-            if (total_minutes//60) == 0 and minute <= min_free: #within minutes are free
+            if hour == 0 and minute <= min_free: #within minutes are free
                 amount = 0 
         else:
-            # subsequent hours charge calculation 
-            amount = fir_charge + ((total_minutes - ( fir_hours * 60 )) // 30) * sub_charge
-            if minute > tol_min: # maximum charge
-                amount += sub_charge             
+            # expression amount = 5 + (hour-2)*2 + 2
+            amount = fir_charge + (total_minutes - fir_hours * 60) // sub_min * sub_charge
+            # 3 +( (186 - 3 * 60 ) // 60 )* 1
+            if minute > tol_min:
+                amount += sub_charge            
         return amount
 
     amount = inner(day)
@@ -95,3 +98,16 @@ if __name__ == "__main__":
 
 """-----------------------------------------------------------"""
 
+"""
+#1: sub_min:60  test input: 03:06
+amount = fir_charge + (hour - fir_hours) * sub_charge
+# 3 + (3 - 3) * 1
+amount = fir_charge + (total_minutes - fir_hours * 60) // sub_min * sub_charge
+# 3 + (186 - 180) // 60 * 1
+
+#2: sub_min:30 test input :03:36
+amount = fir_charge + (hour - fir_hours) * sub_charge
+# 3 + (3 - 3) * 1
+amount = fir_charge + (total_minutes - fir_hours * 60) // sub_min * sub_charge
+# 3 + ( (216 - 3 * 60) // 30 ) * 1 
+"""
