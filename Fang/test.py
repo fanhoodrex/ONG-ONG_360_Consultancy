@@ -46,19 +46,16 @@ def time_input_eva():
                 continue
             else:
                 # in case if user enter minute value > 60 
-                if (minute//60) != 0:
+                if (minute//60) != 0: 
                     hour += (minute//60) # add to hour 
                     minute %= 60 # reduce the minute
+                total_minutes = hour * 60 + minute # conver the HH:MM format to minutes
                 break
-        except ValueError:
-            print("ValueError,pls enter correct (Hours:Minutes HH:MM format) format......")
+        except (IndexError,ValueError):
+            print("pls enter correct (Hours:Minutes HH:MM format) format......")
             time.sleep(1.5)
             continue
-        except IndexError:
-            print("IndexError,pls enter (Hours:Minutes HH:MM format)......")
-            time.sleep(1.5)
-            continue
-    return hour,minute
+    return hour,minute,total_minutes
 
 def week(): # enter the how many day are considered as weekday,return as tuple
     "outer function that return the amount value"
@@ -70,15 +67,15 @@ def week(): # enter the how many day are considered as weekday,return as tuple
         min_free = price_dict[day][3] #get the minimum minutes free from dictionary
         tol_min = price_dict[day][4] #get the tolerate minutes from dictionary
 
-        if 0 <= hour < fir_hours: # first few hours free
+        if 0 <= (total_minutes//60) < fir_hours: # first few hours free
             amount = fir_charge
-            if hour == 0 and minute <= min_free: #within minutes are free
+            if (total_minutes//60) == 0 and minute <= min_free: #within minutes are free
                 amount = 0 
         else:
             # subsequent hours charge calculation 
-            amount = fir_charge + (hour - fir_hours) * sub_charge
+            amount = fir_charge + ((total_minutes - ( fir_hours * 60 )) // 30) * sub_charge
             if minute > tol_min: # maximum charge
-                amount += sub_charge            
+                amount += sub_charge             
         return amount
 
     amount = inner(day)
@@ -88,9 +85,13 @@ def week(): # enter the how many day are considered as weekday,return as tuple
     return amount
     
 #below is the main function 
-while True:
-    day = day_input_eva()
-    max_charge = price_dict[day][-1] # get the maximum charge from the price dictionary
-    hour,minute = time_input_eva()
-    amount = week()
-    print(f"Duration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
+if __name__ == "__main__":
+    while True:
+        day = day_input_eva()
+        max_charge = price_dict[day][-1] # get the maximum charge from the price dictionary
+        hour,minute,total_minutes = time_input_eva()
+        amount = week()
+        print(f"Duration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
+
+"""-----------------------------------------------------------"""
+
