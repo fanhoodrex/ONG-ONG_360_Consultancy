@@ -15,8 +15,6 @@ price_dict = {
     6:[2,5,60,2,15,5,40],
     7:[2,5,60,2,15,5,40],
 }
-
-
 # the order of parameters is fir_hours,fir_charge,sub_charge,min_free,tol_min
 enter_count = 1
 
@@ -68,14 +66,7 @@ def time_input_eva():
 
 def week(day,hour,minute,total_minutes): # enter the how many day are considered as weekday,return as tuple
     "outer function that return the amount value"
-    fir_hours = price_dict[day][0] #get the first hour amount from dictionary
-    fir_charge = price_dict[day][1] #get the first charge amount from dictionary
-    sub_min = price_dict[day][2] #get the subsequent min from dictionary
-    sub_charge = price_dict[day][3] #get the subsequent charge amount from dictionary
-    min_free = price_dict[day][4] #get the minimum minutes free from dictionary
-    tol_min = price_dict[day][5] #get the tolerate minutes from dictionary
-    max_charge = price_dict[day][-1] # get the maximum charge from the price dictionary
-
+    fir_hours,fir_charge,sub_min,sub_charge,min_free,tol_min,max_charge = price_dict[day]
     amount = 0 # initialize the local variable
     # 3 layers nested if else statement
     if 0 <= total_minutes <= min_free:#first 15 min free
@@ -99,3 +90,13 @@ while True:
     amount = week(day,hour,minute,total_minutes)
     print(f"Total Minutes:{total_minutes}\nDuration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
     time.sleep(0.5)
+
+"""
+fir_hours = price_dict[day][0] #get the first hour amount from dictionary
+fir_charge = price_dict[day][1] #get the first charge amount from dictionary
+sub_min = price_dict[day][2] #get the subsequent min from dictionary
+sub_charge = price_dict[day][3] #get the subsequent charge amount from dictionary
+min_free = price_dict[day][4] #get the minimum minutes free from dictionary
+tol_min = price_dict[day][5] #get the tolerate minutes from dictionary
+max_charge = price_dict[day][-1] # get the maximum charge from the price dictionary
+"""
