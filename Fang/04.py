@@ -15,8 +15,11 @@ price_dict = {
     6:[2,5,60,2,15,5,40],
     7:[2,5,60,2,15,5,40],
 }
+
+
 # the order of parameters is fir_hours,fir_charge,sub_charge,min_free,tol_min
 enter_count = 1
+
 def day_input_eva():
     "this function is mainly for validating user's input on day chosen "
     global enter_count
@@ -63,7 +66,7 @@ def time_input_eva():
             continue
     return hour,minute,total_minutes
 
-def week(hour,minute,total_minutes): # enter the how many day are considered as weekday,return as tuple
+def week(day,hour,minute,total_minutes): # enter the how many day are considered as weekday,return as tuple
     "outer function that return the amount value"
     fir_hours = price_dict[day][0] #get the first hour amount from dictionary
     fir_charge = price_dict[day][1] #get the first charge amount from dictionary
@@ -71,16 +74,16 @@ def week(hour,minute,total_minutes): # enter the how many day are considered as 
     sub_charge = price_dict[day][3] #get the subsequent charge amount from dictionary
     min_free = price_dict[day][4] #get the minimum minutes free from dictionary
     tol_min = price_dict[day][5] #get the tolerate minutes from dictionary
-        
+    max_charge = price_dict[day][-1] # get the maximum charge from the price dictionary
+
+    amount = 0 # initialize the local variable
     # 3 layers nested if else statement
     if 0 <= total_minutes <= min_free:#first 15 min free
-        amount = 0
+        return amount
     elif min_free < total_minutes <= 60 * fir_hours: # first 3 hours free 3:05 = 180 minutes
         amount = fir_charge
     else:# time is 3 hours above and amount charge based on minute unit
         minute = total_minutes - (fir_hours * 60)
-        print(amount)
-        print(minute)
         while minute > tol_min:
             amount += sub_charge # increase the subsequent charge each iteration
             minute -= sub_min # substract the subsequent minute each iteration
@@ -92,7 +95,7 @@ def week(hour,minute,total_minutes): # enter the how many day are considered as 
 #if __name__ == "__main__":
 while True:
     day = day_input_eva()
-    max_charge = price_dict[day][-1] # get the maximum charge from the price dictionary
     hour,minute,total_minutes = time_input_eva()
-    amount = week(hour,minute,total_minutes)
+    amount = week(day,hour,minute,total_minutes)
     print(f"Total Minutes:{total_minutes}\nDuration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
+    time.sleep(0.5)
