@@ -90,13 +90,3 @@ while True:
     amount = week(day,hour,minute,total_minutes)
     print(f"Total Minutes:{total_minutes}\nDuration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
     time.sleep(0.5)
-
-"""
-fir_hours = price_dict[day][0] #get the first hour amount from dictionary
-fir_charge = price_dict[day][1] #get the first charge amount from dictionary
-sub_min = price_dict[day][2] #get the subsequent min from dictionary
-sub_charge = price_dict[day][3] #get the subsequent charge amount from dictionary
-min_free = price_dict[day][4] #get the minimum minutes free from dictionary
-tol_min = price_dict[day][5] #get the tolerate minutes from dictionary
-max_charge = price_dict[day][-1] # get the maximum charge from the price dictionary
-"""
