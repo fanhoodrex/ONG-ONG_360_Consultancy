@@ -79,7 +79,6 @@ def week(hour,minute,total_minutes): # enter the how many day are considered as 
         amount = fir_charge
     else:# time is 3 hours above and amount charge based on minute unit
         minute = total_minutes - (fir_hours * 60)
-        amount = fir_charge + (hour - fir_hours) * sub_charge # compute the amount based on the hour unit
         print(amount)
         print(minute)
         while minute > tol_min:
