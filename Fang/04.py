@@ -2,13 +2,13 @@ import time
 # define the price dictionary for each different day
 # [first hour,Amount,Subsequent Minute,Subsequent Amount,Exit mins free,Tolerate 5 min,Max charge Amount]
 price_dict = {
-    1:[3,3,60,1,15,5,20],
-    2:[3,3,60,1,15,5,20],
-    3:[3,0,30,1,15,5,20], # requirement change as first 3 hour cost 0 RM 
-    4:[3,3,60,1,15,5,20],
-    5:[3,3,60,1,15,5,20],
-    6:[2,5,60,2,15,5,40],
-    7:[2,5,60,2,15,5,40],
+    1:[180,3,60,1,15,5,20],
+    2:[180,3,60,1,15,5,20],
+    3:[180,0,30,1,15,5,20], # requirement change as first 3 hour cost 0 RM 
+    4:[180,3,60,1,15,5,20],
+    5:[180,3,60,1,15,5,20],
+    6:[120,5,60,2,15,5,40],
+    7:[120,5,60,2,15,5,40],
 }
 enter_count = 1
 
@@ -60,21 +60,22 @@ def time_input_eva():
 
 def week(day,hour,minute,total_minutes): # enter the how many day are considered as weekday,return as tuple
     "outer function that return the amount value"
-    fir_hours,fir_charge,sub_min,sub_charge,min_free,tol_min,max_charge = price_dict[day] #one line multiple assignment
+    fir_time_free,fir_charge,sub_min,sub_charge,min_free,tol_min,max_charge = price_dict[day] #one line multiple assignment
     amount = 0 # initialize the local variable
     # 3 layers nested if else statement
     if 0 <= total_minutes <= min_free:#first 15 min free
         pass
-    elif min_free < total_minutes <= 60 * fir_hours: # first 3 hours free 3:05 = 180 minutes
+    elif min_free < total_minutes <= fir_time_free: # first 3 hours free 3:05 = 180 minutes
         amount = fir_charge
     else:# time is 3 hours above and amount charge based on minute unit
-        minute = total_minutes - (fir_hours * 60)
+        minute = total_minutes - fir_time_free
         amount = fir_charge # add from fir_charge
+        print(minute,amount,total_minutes)
         while minute > tol_min:
             amount += sub_charge # increase the subsequent charge each iteration
             minute -= sub_min # substract the subsequent minute each iteration
-        if amount > max_charge:
-            amount = max_charge # reassignment if exceed the maximum charge
+    if amount > max_charge:
+        amount = max_charge # reassignment if exceed the maximum charge
     return amount
     
 #below is the main function 
@@ -85,4 +86,3 @@ if __name__ == "__main__":
         amount = week(day,hour,minute,total_minutes)
         print(f"Total Minutes:{total_minutes}\nDuration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
         time.sleep(0.5)
-        
