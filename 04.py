@@ -1,3 +1,8 @@
+"""
+this test1 is used to test the computing part on the amount 
+based on iteration and while loop 
+"""
+
 import time
 # define the price dictionary for each different day
 # [first hour,Amount,Subsequent Minute,Subsequent Amount,Exit mins free,Tolerate 5 min,Max charge Amount]
@@ -60,16 +65,15 @@ def time_input_eva():
 
 def week(day,hour,minute,total_minutes): # enter the how many day are considered as weekday,return as tuple
     "outer function that return the amount value"
-    fir_hours,fir_charge,sub_min,sub_charge,min_free,tol_min,max_charge = price_dict[day] #one line multiple assignment
+    fir_hours,fir_charge,sub_min,sub_charge,min_free,tol_min,max_charge = price_dict[day]
     amount = 0 # initialize the local variable
     # 3 layers nested if else statement
     if 0 <= total_minutes <= min_free:#first 15 min free
-        pass
+        return amount
     elif min_free < total_minutes <= 60 * fir_hours: # first 3 hours free 3:05 = 180 minutes
         amount = fir_charge
     else:# time is 3 hours above and amount charge based on minute unit
         minute = total_minutes - (fir_hours * 60)
-        amount = fir_charge # add from fir_charge
         while minute > tol_min:
             amount += sub_charge # increase the subsequent charge each iteration
             minute -= sub_min # substract the subsequent minute each iteration
@@ -85,4 +89,3 @@ if __name__ == "__main__":
         amount = week(day,hour,minute,total_minutes)
         print(f"Total Minutes:{total_minutes}\nDuration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
         time.sleep(0.5)
-        
