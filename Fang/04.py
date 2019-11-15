@@ -5,7 +5,7 @@ based on iteration and while loop
 
 import time
 # define the price dictionary for each different day
-# [ first 3 hour , RM3, Subsequent hour 1 , Exit 15 mins are free , Tolerate 5 min,Max charge RM]
+# [first hour,Amount,Subsequent Minute,Subsequent Amount,Exit mins free,Tolerate 5 min,Max charge Amount]
 price_dict = {
     1:[3,3,60,1,15,5,20],
     2:[3,3,60,1,15,5,20],
@@ -15,7 +15,6 @@ price_dict = {
     6:[2,5,60,2,15,5,40],
     7:[2,5,60,2,15,5,40],
 }
-# the order of parameters is fir_hours,fir_charge,sub_charge,min_free,tol_min
 enter_count = 1
 
 def day_input_eva():
@@ -83,10 +82,10 @@ def week(day,hour,minute,total_minutes): # enter the how many day are considered
     return amount
     
 #below is the main function 
-#if __name__ == "__main__":
-while True:
-    day = day_input_eva()
-    hour,minute,total_minutes = time_input_eva()
-    amount = week(day,hour,minute,total_minutes)
-    print(f"Total Minutes:{total_minutes}\nDuration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
-    time.sleep(0.5)
+if __name__ == "__main__":
+    while True:
+        day = day_input_eva()
+        hour,minute,total_minutes = time_input_eva()
+        amount = week(day,hour,minute,total_minutes)
+        print(f"Total Minutes:{total_minutes}\nDuration: {hour} Hours {minute} Minutes\nNet Amount Needed To Paid: {amount} RM\n")
+        time.sleep(0.5)
