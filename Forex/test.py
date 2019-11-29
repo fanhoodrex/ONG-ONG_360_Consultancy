@@ -8,7 +8,7 @@ start_date = input("Enter the start date:")
 end_date = input("Enter the end date:")
 base_currency = input("Enter the base_currency: ")
 quote_currency_0 = input("Enter the quote_currency_0")
-quote_currency_1 = input("Enter the quote_currency_1")
+quote_currency_1 = 
 """
 
 params = {
@@ -20,8 +20,7 @@ params = {
     "period": "daily",
     "price": "bid",
     "view": "graph",
-    "quote_currency_0":"MYR",
-    "quote_currency_1":"CNY"
+    "quote_currency_0":input("Enter the quoted currency:")
 }
 
 header = {
@@ -31,25 +30,25 @@ header = {
 respone = requests.get(url,headers=header,params=params)
 
 if respone.status_code == 200:
-    print("request is successful")
+    print("Request is successful")
     time.sleep(1)
     res_dict = json.loads(respone.text)#convert json string to Python data type
 else:
     print("error",respone.status_code)
 
-time.sleep(2)
-print("\n\n")
+time.sleep(1)
+print("\n")
 
-
-with open("JSON1.json","w") as f:
+with open("respone_data.json","w") as f:
     str_json = json.dumps(res_dict,sort_keys=True,indent=None)
     f.write(str_json)
 
 date = params["start_date"]
 base_currency = params["base_currency"]
-
+quote_currency = params["quote_currency_0"]
 
 def get_keynumber():
+    """get the index number of the key from the params dictionary """
     key_list = list(params.keys()) # get the keys list first
     currency_index = key_list.index("quote_currency_0") # get the index in the list
     keynumber = int(key_list[currency_index][-1]) # get the last number in string
@@ -58,5 +57,4 @@ keynumber = get_keynumber()
 
 average_rate = res_dict["widget"][keynumber]["data"][0][-1] #=get the average_rate
 
-print(date,f"{base_currency}>",average_rate)
-
+print(f"{date}: {base_currency} > {quote_currency} = {average_rate}")
