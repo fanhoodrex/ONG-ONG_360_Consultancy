@@ -55,9 +55,16 @@ with open("JSON1.json","w") as f:
 
 date = params["start_date"]
 base_currency = params["base_currency"]
+quoteCurrency = params[""]
 
+def get_keynumber():
+    key_list = list(params.keys()) # get the keys list first
+    currency_index = key_list.index("quote_currency_0") # get the index in the list
+    keynumber = int(key_list[currency_index][-1]) # get the last number in string
+    return keynumber
+keynumber = get_keynumber()
 
-average_rate = res_dict["widget"][0]["data"][0][-1] #=get the average_rate
+average_rate = res_dict["widget"][keynumber]["data"][0][-1] #=get the average_rate
 
-print(date,base_currency,average_rate)
+# print(date,f"{base_currency}>{quoteCurrency}",average_rate)
 
