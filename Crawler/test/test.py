@@ -1,4 +1,5 @@
 import requests,time,json
+from operator import itemgetter
 
 def Crawl_Data(date,base_currency,list_quote):
     """get the responing json data and return the required dictionary from json """
@@ -43,22 +44,23 @@ def Crawl_Data(date,base_currency,list_quote):
             params = append_dict() # reassign the params by calling function
             respone = requests.get(url,headers=header,params=params)
             res_dict = json.loads(respone.text) #convert json string to Python data type
-            with open("respone_data.json","w") as f:
+            with open("respone_dict_json.json","w") as f:
                 str_json = json.dumps(res_dict,sort_keys=True,indent=None)
                 f.write(str_json)
-        return None
+        # list comprehension  
+        quoteCurrency = [sub['quoteCurrency'] for sub in res_dict["widget"]]
+        average_rate = [sub['average'] for sub in res_dict["widget"]]
+        result_dict = {'date':date,'base':base_currency,}
+        rate = dict(zip(quoteCurrency,average_rate)) # use zip method to turn 2 list into dictionary
+        result_dict["rate"] = rate
+        return result_dict
 
     except Exception:
         print("request failed, error:",respone.status_code)
 
-json  
+date = "2019-12-04"
+base_currency = 'MYR'
+list_quote = ['CNY','USD','GBP','SGD']
 
-
-
-
-"""
-    date = params["start_date"]
-    base_currency = params["base_currency"]
-    quote_currency = params["quote_currency_0"]
-    average_rate = res_dict["widget"][0]["average"] #get the average_rate
-"""
+result_dict = Crawl_Data(date,base_currency,list_quote)
+print(result_dict)
