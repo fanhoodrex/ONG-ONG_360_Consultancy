@@ -30,33 +30,50 @@ def Crawl_Data(date,base_currency,list_quote):
         "quote_currency_9":None
     }
 
-    def append_dict():
-        """append the value from the list to the params"""
+    result_dict = {}
+    def append_params(chunk):
+        """append the quote currency from the list to the params"""
         n = 0
         nonlocal params
-        for item in list_quote: # how many times should the loop be
+        for item in chunk: # how many times should the loop be
             params["quote_currency_"+str(n)] = item # append the value from the list to the dictionary  
             n += 1 
         return params
 
-    try:
-        if len(list_quote) <= 10: # if the quote_currencies is larger or equal to 10 
-            params = append_dict() # reassign the params by calling function
-            respone = requests.get(url,headers=header,params=params)
-            res_dict = json.loads(respone.text) #convert json string to Python data type
-            with open("respone_dict_json.json","w") as f:
-                str_json = json.dumps(res_dict,sort_keys=True,indent=None)
-                f.write(str_json)
-        # list comprehension  
-        quoteCurrency = [sub['quoteCurrency'] for sub in res_dict["widget"]]
-        average_rate = [sub['average'] for sub in res_dict["widget"]]
-        result_dict = {'date':date,'base':base_currency,}
-        rate = dict(zip(quoteCurrency,average_rate)) # use zip method to turn 2 list into dictionary
-        result_dict["rate"] = rate
-        return result_dict
+    def request_json():
+        respone = requests.get(url,headers=header,params=params)
+        res_dict = json.loads(respone.text) #convert json string to Python data type
+        with open("json1.json","w") as f:
+            str_json = json.dumps(res_dict,sort_keys=True,indent=None)
+            f.write(str_json)
+        return res_dict
 
+    try:
+        while len(list_quote) > 0:
+            chunk = list_quote[:10] # slice the first batch of 10 currency
+            params = append_params(chunk) # fill the params with chunk of 10 currency
+            print("ok1")
+            res_dict = request_json() # send the request and return json dictionary
+            print("ok2")
+            result_dict['widget'] = res_dict["widget"]
+            print("ok3")
+            print(result_dict)
+            # append widget key value to the widget dictionary during each loop
+            print("ok4")
+            list_quote = list_quote[10:] # remove the first batch of 10 currency
+            time.sleep(1)
+            # list comprehension 
+            """
+            quoteCurrency = [sub['quoteCurrency'] for sub in res_dict["widget"]]
+            average_rate = [sub['average'] for sub in res_dict["widget"]]
+            result_dict = {'date':date,'base':base_currency,} # initialize the dictionry
+            rate = dict(zip(quoteCurrency,average_rate)) # zip method to turn 2 list into dictionary
+            result_dict["rate"] = rate
+            return result_dict
+            """
+        return result_dict
     except Exception:
-        print("request failed, error:",respone.status_code)
+        print("request failed, error:")
 
 date = "2019-12-04"
 base_currency = 'MYR'
