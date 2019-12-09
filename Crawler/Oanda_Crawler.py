@@ -1,42 +1,81 @@
 import requests,time,json
-from bs4 import BeautifulSoup
+from operator import itemgetter
 
-url = "https://www1.oanda.com/fx-for-business/historical-rates/api/data/update/"
-header = {
-    "referer": 'https://www1.oanda.com/fx-for-business/historical-rates',
-    "user-agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
-    }
+def Crawl_Data(date,base_currency,list_quote):
+    """get the responing json data and return the required dictionary from json """
 
-while True:
-    start_date = input("Enter the date of forex data you wanna search (YYYY-MM-DD Format):")
+    url = "https://www1.oanda.com/fx-for-business/historical-rates/api/data/update/"
+    header = {
+        "referer": 'https://www1.oanda.com/fx-for-business/historical-rates',
+        "user-agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
+        }
     params = {
         "source": "OANDA",
         "adjustment":"0",
-        "base_currency": input("Enter the base currency:"),
-        "start_date": start_date,
-        "end_date": start_date,
+        "base_currency":base_currency,
+        "start_date": date,
+        "end_date": date,
         "period": "daily",
         "price": "bid",
         "view": "graph",
-        "quote_currency_0":input("Enter the quoted currency:")
+        "quote_currency_0":None,
+        "quote_currency_1":None,
+        "quote_currency_2":None,
+        "quote_currency_3":None,
+        "quote_currency_4":None,
+        "quote_currency_5":None,
+        "quote_currency_6":None,
+        "quote_currency_7":None,
+        "quote_currency_8":None,
+        "quote_currency_9":None
     }
 
-    respone = requests.get(url,headers=header,params=params)
+    def append_params(chunk):
+        """append the quote currency from the list to the params"""
+        n = 0
+        nonlocal params
+        for item in chunk: # how many times should the loop be
+            params["quote_currency_"+str(n)] = item # append the value from the list to the dictionary  
+            n += 1 
+        return params
 
-    if respone.status_code == 200:
+    def request_json():
+        respone = requests.get(url,headers=header,params=params)
         res_dict = json.loads(respone.text) #convert json string to Python data type
-        with open("respone_data.json","w") as f:
+        with open("res_dict1.json","w") as f:
             str_json = json.dumps(res_dict,sort_keys=True,indent=None)
             f.write(str_json)
-    else:
-        print("request failed, error:",respone.status_code)
-        continue
-    
-    #get the value from the params dictionary
-    date = params["start_date"]
-    base_currency = params["base_currency"]
-    quote_currency = params["quote_currency_0"]
+        return res_dict
 
-    average_rate = res_dict["widget"][0]["average"] #get the average_rate
+    try:
+        while len(list_quote) > 0:
+            chunk = list_quote[:10] # slice the first batch of 10 currency
+            params = append_params(chunk) # fill the params with chunk of 10 currency
+            res_dict = request_json() # send the request and return json dictionary
+            
+            # make the last element of rates in dictionary
+            quoteCurrency = [item['quoteCurrency'] for item in res_dict["widget"]] # list comprehension
+            average_rate = [item['average'] for item in res_dict["widget"]] # list comprehension
+            rates = dict(zip(quoteCurrency,average_rate)) # zip method to turn 2 list into dictionary
+            result_dict["rates"] = rates
+            
+            list_quote = list_quote[10:] # remove the first batch of 10 currency
+            time.sleep(1)
 
-    print(f"{date}: {base_currency} > {quote_currency} = {average_rate}")
+        return result_dict
+    except Exception:
+        print("request failed, error:")
+
+search_date = "2019-12-04"
+base_currency = 'MYR'
+list_quote = ['CNY','USD','GBP','SGD']
+
+result_dict = {'base':base_currency,'date':search_date} # initialize
+result_dict = Crawl_Data(search_date,base_currency,list_quote) # add the rates key/values to result dict
+
+print(result_dict)
+print("\n")
+
+for key,value in result_dict.items():
+    print(f"{key}: {value}")
+    time.sleep(1)

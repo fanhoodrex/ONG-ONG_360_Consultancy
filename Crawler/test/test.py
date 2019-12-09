@@ -52,19 +52,16 @@ def Crawl_Data(date,base_currency,list_quote):
             chunk = list_quote[:10] # slice the first batch of 10 currency
             params = append_params(chunk) # fill the params with chunk of 10 currency
             res_dict = request_json() # send the request and return json dictionary
-            result_dict['rates'] = res_dict["widget"]
-            # append widget key value to the widget dictionary during each loop
+            
+            # make the last element of rates in dictionary
+            quoteCurrency = [item['quoteCurrency'] for item in res_dict["widget"]] # list comprehension
+            average_rate = [item['average'] for item in res_dict["widget"]] # list comprehension
+            rates = dict(zip(quoteCurrency,average_rate)) # zip method to turn 2 list into dictionary
+            result_dict["rates"] = rates
+            
             list_quote = list_quote[10:] # remove the first batch of 10 currency
             time.sleep(1)
 
-            """
-            quoteCurrency = [sub['quoteCurrency'] for sub in res_dict["widget"]]
-            average_rate = [sub['average'] for sub in res_dict["widget"]]
-            result_dict = {'date':date,'base':base_currency,} # initialize the dictionry
-            rate = dict(zip(quoteCurrency,average_rate)) # zip method to turn 2 list into dictionary
-            result_dict["rate"] = rate
-            return result_dict
-            """
         return result_dict
     except Exception:
         print("request failed, error:")
@@ -78,4 +75,7 @@ result_dict = Crawl_Data(search_date,base_currency,list_quote) # add the rates k
 
 print(result_dict)
 print("\n")
-print(result_dict['rates'])
+
+for key,value in result_dict.items():
+    print(f"{key}: {value}")
+    time.sleep(1)
