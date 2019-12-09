@@ -47,35 +47,36 @@ def Crawl_Data(date,base_currency,list_quote):
             f.write(str_json)
         return res_dict
 
-    try:
-        while len(list_quote) > 0:
-            chunk = list_quote[:10] # slice the first batch of 10 currency
-            params = append_params(chunk) # fill the params with chunk of 10 currency
-            res_dict = request_json() # send the request and return json dictionary
-            
-            # make the last element of rates in dictionary
-            quoteCurrency = [item['quoteCurrency'] for item in res_dict["widget"]] # list comprehension
-            average_rate = [item['average'] for item in res_dict["widget"]] # list comprehension
-            rates = dict(zip(quoteCurrency,average_rate)) # zip method to turn 2 list into dictionary
-            result_dict["rates"] = rates
-            
-            list_quote = list_quote[10:] # remove the first batch of 10 currency
-            time.sleep(1)
 
-        return result_dict
-    except Exception:
-        print("request failed, error:")
+    while len(list_quote) > 0:
+        chunk = list_quote[:10] # slice the first batch of 10 currency
+        params = append_params(chunk) # fill the params with chunk of 10 currency
+        res_dict = request_json() # send the request and return json dictionary
+
+        # make the last element of rates in dictionary
+        quoteCurrency = [item['quoteCurrency'] for item in res_dict["widget"]] # list comprehension
+        average_rate = [item['average'] for item in res_dict["widget"]] # list comprehension
+        rates = dict(zip(quoteCurrency,average_rate)) # zip method to turn 2 list into dictionary
+
+        # append the key,value pair to result_dict during each loop 
+        for k,v in rates.items():
+            result_dict['rates'][k] = v
+        list_quote = list_quote[10:] # remove the first batch of 10 currency
+        time.sleep(1)
+
+    return result_dict
 
 search_date = "2019-12-04"
 base_currency = 'MYR'
-list_quote = ['CNY','USD','GBP','SGD']
+list_quote = ['CNY','USD','GBP','SGD','CAD','AUD','EUR','THB','VND','MYR','SAR','LYD'] # more than 10 currencies
 
-result_dict = {'base':base_currency,'date':search_date} # initialize
+result_dict = {'base':base_currency,'date':search_date,'rates':{}} # initialize
 result_dict = Crawl_Data(search_date,base_currency,list_quote) # add the rates key/values to result dict
-
-print(result_dict)
-print("\n")
 
 for key,value in result_dict.items():
     print(f"{key}: {value}")
+    time.sleep(0.5)
+print("\n")
+for k,v in result_dict['rates'].items():
+    print(f"{k}:{v}")
     time.sleep(1)
