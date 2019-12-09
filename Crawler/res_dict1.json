@@ -1,0 +1,65 @@
+{
+    "frequency": "daily",
+    "ui": {
+        "max_period": 0,
+        "min_period": 0
+    },
+    "widget": [
+        {
+            "average": "1.687334",
+            "baseCurrency": "MYR",
+            "data": [
+                [
+                    1575417600000,
+                    "1.687334"
+                ]
+            ],
+            "high": "1.687334",
+            "low": "1.687334",
+            "quoteCurrency": "CNY",
+            "type": "bid"
+        },
+        {
+            "average": "0.239155",
+            "baseCurrency": "MYR",
+            "data": [
+                [
+                    1575417600000,
+                    "0.239155"
+                ]
+            ],
+            "high": "0.239155",
+            "low": "0.239155",
+            "quoteCurrency": "USD",
+            "type": "bid"
+        },
+        {
+            "average": "0.183185",
+            "baseCurrency": "MYR",
+            "data": [
+                [
+                    1575417600000,
+                    "0.183185"
+                ]
+            ],
+            "high": "0.183185",
+            "low": "0.183185",
+            "quoteCurrency": "GBP",
+            "type": "bid"
+        },
+        {
+            "average": "0.326088",
+            "baseCurrency": "MYR",
+            "data": [
+                [
+                    1575417600000,
+                    "0.326088"
+                ]
+            ],
+            "high": "0.326088",
+            "low": "0.326088",
+            "quoteCurrency": "SGD",
+            "type": "bid"
+        }
+    ]
+}
