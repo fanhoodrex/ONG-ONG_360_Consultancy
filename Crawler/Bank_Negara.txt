@@ -1,9 +1,0 @@
-1) how to insert different element into same row in excel using openpyxl
-
-2) how to switch to the next line in excel using openpyxl
-
-3)
-
-  for li in table_rows.find_all( ):
-        time.sleep(1)
-        print(li.text)

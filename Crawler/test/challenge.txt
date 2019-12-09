@@ -1,4 +1,0 @@
-
-Challenge occurred 
-
-1) how to update  dictionary generated each loop to a existing dictionary 

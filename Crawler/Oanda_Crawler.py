@@ -1,5 +1,4 @@
 import requests,time,json
-from operator import itemgetter
 
 def Crawl_Data(date,base_currency,list_quote):
     """get the responing json data and return the required dictionary from json """
