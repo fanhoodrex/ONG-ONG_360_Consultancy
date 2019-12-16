@@ -40,42 +40,56 @@ def Crawl_Data(date,base_currency,list_quote):
 
     def request_json():
         respone = requests.get(url,headers=header,params=params)
-        res_dict = json.loads(respone.text) #convert json string to Python data type
-        with open("res_dict1.json","w") as f:
-            str_json = json.dumps(res_dict,sort_keys=True,indent=None)
-            f.write(str_json)
-        return res_dict
-
+        if respone.status_code == 200:
+            res_dict = json.loads(respone.text) #convert json string to Python data type
+            with open("res_dict1.json","w") as f:
+                str_json = json.dumps(res_dict,sort_keys=True,indent=None)
+                f.write(str_json)
+            return res_dict,respone.status_code
+        elif respone.status_code == 204:
+            res_dict = json.loads(respone.text) #convert json string to Python data type
+            return res_dict,respone.status_code
 
     while len(list_quote) > 0:
         chunk = list_quote[:10] # slice the first batch of 10 currency
         params = append_params(chunk) # fill the params with chunk of 10 currency
-        res_dict = request_json() # send the request and return json dictionary
+        try:
+            res_dict,status_code = request_json() # send the request and return json dictionary
+            # make the last element of rates in dictionary
+            quoteCurrency = [item['quoteCurrency'] for item in res_dict["widget"]] # list comprehension
+            average_rate = [item['average'] for item in res_dict["widget"]] # list comprehension
+            rates = dict(zip(quoteCurrency,average_rate)) # zip method to turn 2 list into dictionary
 
-        # make the last element of rates in dictionary
-        quoteCurrency = [item['quoteCurrency'] for item in res_dict["widget"]] # list comprehension
-        average_rate = [item['average'] for item in res_dict["widget"]] # list comprehension
-        rates = dict(zip(quoteCurrency,average_rate)) # zip method to turn 2 list into dictionary
+            # append the key,value pair to result_dict during each loop 
+            for k,v in rates.items():
+                result_dict['rates'][k] = v
+            list_quote = list_quote[10:] # remove the first batch of 10 currency
+            time.sleep(1)
 
-        # append the key,value pair to result_dict during each loop 
-        for k,v in rates.items():
-            result_dict['rates'][k] = v
-        list_quote = list_quote[10:] # remove the first batch of 10 currency
-        time.sleep(1)
+        except Exception:
+            return None,404
 
-    return result_dict
+    return result_dict,status_code
 
 search_date = "2019-12-04"
 base_currency = 'MYR'
 list_quote = ['CNY','USD','GBP','SGD','CAD','AUD','EUR','THB','VND','MYR','SAR','LYD'] # more than 10 currencies
 
 result_dict = {'base':base_currency,'date':search_date,'rates':{}} # initialize
-result_dict = Crawl_Data(search_date,base_currency,list_quote) # add the rates key/values to result dict
+result_dict,status_code = Crawl_Data(search_date,base_currency,list_quote) # add the rates key/values to result dict
 
-for key,value in result_dict.items():
-    print(f"{key}: {value}")
-    time.sleep(0.5)
-print("\n")
-for k,v in result_dict['rates'].items():
-    print(f"{k}:{v}")
+if status_code == 200: 
+    print(f"status_code:{status_code} Respone Successfully")
+    print("\n")
     time.sleep(1)
+    for key,value in result_dict.items():
+        print(f"{key}: {value}")
+        time.sleep(0.5)
+    print("\n")
+    for k,v in result_dict['rates'].items():
+        print(f"{k}:{v}")
+        time.sleep(0.5)
+elif status_code == 204:
+    print(f"status_code:{status_code} No content")
+else:
+    print("404, request failed")
