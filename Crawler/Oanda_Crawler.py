@@ -39,17 +39,20 @@ def Crawl_Data(date,base_currency,list_quote):
         return params
 
     def request_json():
-        respone = requests.get(url,headers=header,params=params)
-        code = respone.status_code
-        #convert json string to Python data type
-        res_dict = json.loads(respone.text)
-        #add the status code to the result_dict (re-assignment would occure due to while loop )
-        result_dict['status'] = code
-        with open("res_dict1.json","w") as f:
-            str_json = json.dumps(res_dict,sort_keys=True,indent=None)
-            f.write(str_json)
-        return res_dict
-      
+        try:
+            respone = requests.get(url,headers=header,params=params)
+            #convert json string to Python data type
+            res_dict = json.loads(respone.text)
+            #add the status code to the result_dict (re-assignment would occure due to while loop )
+            result_dict['status'] = respone.status_code
+            with open("res_dict1.json","w") as f:
+                str_json = json.dumps(res_dict,sort_keys=True,indent=None)
+                f.write(str_json)
+            return res_dict
+        except Exception:
+            result_dict['status'] = respone.status_code
+            return res_dict
+
     while len(list_quote) > 0:
         chunk = list_quote[:10] # slice the first batch of 10 currency
         params = append_params(chunk) # fill the params with chunk of 10 currency
@@ -82,5 +85,5 @@ for key,value in result_dict.items():
 print("\n")
 for k,v in result_dict['rates'].items():
     print(f"{k}:{v}")
-    time.sleep(0.5)
+    time.sleep(0.1)
 
