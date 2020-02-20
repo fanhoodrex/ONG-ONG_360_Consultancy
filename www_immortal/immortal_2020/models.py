@@ -110,8 +110,8 @@ class Setting(models.Model):
 
 class Group_Company(models.Model):
     name = models.CharField(max_length=255)
-    url = models.CharField(max_length=500)
-    image = models.FileField(upload_to='group_company_icon/')
+    url = models.URLField(max_length=255, null=True, blank=True, help_text="")
+    icon = models.FileField(upload_to='group_company_icon/')
     publish = models.NullBooleanField(default=True)
     sorting = models.IntegerField()
 
@@ -122,7 +122,7 @@ class Group_Company(models.Model):
 
     def __str__(self):
         return self.name
-
+"""
 class Icons_Class(models.Model):
     name = models.CharField(max_length=255)
     icon_class = models.CharField(max_length=50)
@@ -134,13 +134,13 @@ class Icons_Class(models.Model):
 
     def __str__(self):
         return self.name
-
+"""
 class Social_Media(models.Model):
     name = models.CharField(max_length=255)
-    url = models.CharField(max_length=500)
-    icon = models.ForeignKey(Icons_Class, blank=True, null=True, on_delete=models.SET_NULL)
-    publish = models.NullBooleanField(default=True)
+    url = models.URLField(max_length=255, null=True, blank=True, help_text="")
+    icon = models.FileField(upload_to='social_media_icon/',blank=True, null=True)
     sorting = models.IntegerField()
+    publish = models.NullBooleanField(default=True)
 
     class Meta:
         verbose_name = 'List Social Media Icons'
@@ -182,8 +182,6 @@ class Header_Title_Keyword_Setting(models.Model):
 
     def __str__(self):
         return self.title
-#-------------------------------------------------------------
-
 
 # Office / Contact
 #-------------------------------------------------------------
@@ -246,7 +244,7 @@ class Project(models.Model):
         return self.title
 
 class Project_Content(models.Model):
-    project_id = models.ForeignKey(Project, blank=False, on_delete=models.SET_NULL)
+    project_id = models.ForeignKey(Project, blank=False)
 
     left_title  = models.CharField(max_length=255, null=True, blank=True)
     left_image = models.ImageField(upload_to = get_project_directory_upload_path, null=True, blank=True)
@@ -311,7 +309,7 @@ class Trend(models.Model):
         return self.title
 
 class Trend_Content(models.Model):
-    trend_id = models.ForeignKey(Trend, blank=False, on_delete=models.SET_NULL)
+    trend_id = models.ForeignKey(Trend, blank=False)
 
     left_title  = models.CharField(max_length=255, null=True, blank=True)
     left_image = models.ImageField(upload_to = get_trend_directory_upload_path, null=True, blank=True)
