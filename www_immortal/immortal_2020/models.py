@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.files import File
-from django.core.exceptions import ValidationError
 from immortal_2020 import custom_function
 import sys, os
 
@@ -244,7 +243,7 @@ class Project(models.Model):
         return self.title
 
 class Project_Content(models.Model):
-    project_id = models.ForeignKey(Project, blank=False)
+    project_id = models.ForeignKey(Project, blank=False,on_delete=models.CASCADE)
 
     left_title  = models.CharField(max_length=255, null=True, blank=True)
     left_image = models.ImageField(upload_to = get_project_directory_upload_path, null=True, blank=True)
@@ -309,7 +308,7 @@ class Trend(models.Model):
         return self.title
 
 class Trend_Content(models.Model):
-    trend_id = models.ForeignKey(Trend, blank=False)
+    trend_id = models.ForeignKey(Trend, blank=False,on_delete=models.CASCADE)
 
     left_title  = models.CharField(max_length=255, null=True, blank=True)
     left_image = models.ImageField(upload_to = get_trend_directory_upload_path, null=True, blank=True)
