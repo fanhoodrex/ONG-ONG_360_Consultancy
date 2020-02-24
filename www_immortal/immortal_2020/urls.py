@@ -6,8 +6,6 @@ from immortal_2020 import views
 urlpatterns = [
     url(r'^pdpa/$', views.PdpaView.as_view()),
     url(r'^disclaimer/$', views.DisclaimerView.as_view()),
-
-  
     url(r'^index/$', views.IndexView.as_view()),
     url(r'^main/$', views.IndexView.as_view()),
     url(r'^home/$', views.IndexView.as_view()),

@@ -42,10 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django.contrib.admin',
     'immortal_2020',
     'tinymce',
-    'django.contrib.admin',
     ]
 
 MIDDLEWARE = [
@@ -72,12 +71,12 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'immortal_2020.context_processors.get_social_media',
-                'immortal_2020.context_processors.get_group_company',
-                'immortal_2020.context_processors.get_website_content',
-                'immortal_2020.context_processors.get_website_header',
-                'immortal_2020.context_processors.get_pdpa_content',
+                'django.contrib.messages.context_processors.messages'
+                #'immortal_2020.context_processors.get_social_media',
+                #'immortal_2020.context_processors.get_group_company',
+                #'immortal_2020.context_processors.get_website_content',
+                #'immortal_2020.context_processors.get_website_header',
+                #'immortal_2020.context_processors.get_pdpa_content',
             ],
         },
     },
