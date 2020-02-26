@@ -63,7 +63,7 @@ CONTENT_ROW_STYLE = (
 
 class Project_Type_List(models.Model):
     title = models.CharField(max_length=150, null=False, blank=False)
-    sorting = models.IntegerField(default=100)
+    sorting = models.IntegerField(default=1,null=True, blank=True)
     publish = models.NullBooleanField(default=True)
 
     class Meta:
@@ -76,7 +76,7 @@ class Project_Type_List(models.Model):
 
 class Service_Scope_List(models.Model):
     title = HTMLField(max_length=150, null=False, blank=False)
-    sorting = models.IntegerField(default=100)
+    sorting = models.IntegerField(default=1,null=True, blank=True)
     publish = models.NullBooleanField(default=True)
     
     class Meta:
@@ -112,7 +112,7 @@ class Group_Company(models.Model):
     url = models.URLField(max_length=255, null=True, blank=True, help_text="")
     icon = models.FileField(upload_to='group_company_icon/')
     publish = models.NullBooleanField(default=True)
-    sorting = models.IntegerField()
+    sorting = models.IntegerField(default=1,null=True, blank=True)
 
     class Meta:
         verbose_name = 'Group Company'
@@ -138,7 +138,7 @@ class Social_Media(models.Model):
     name = models.CharField(max_length=255)
     url = models.URLField(max_length=255, null=True, blank=True, help_text="")
     icon = models.FileField(upload_to='social_media_icon/',blank=True, null=True)
-    sorting = models.IntegerField()
+    sorting = models.IntegerField(default=1,null=True, blank=True)
     publish = models.NullBooleanField(default=True)
 
     class Meta:
@@ -163,6 +163,7 @@ class Disclaimer(models.Model):
     name = models.CharField(max_length=255)
     body_text = HTMLField()
     publish = models.NullBooleanField(default=True)
+    sorting = models.IntegerField(default=1,null=True, blank=True)
 
     class Meta:
         verbose_name = 'Disclaimer'
@@ -193,7 +194,7 @@ class Office(models.Model):
     country = CountryField(max_length=85,null=False)
     google_map = models.URLField(max_length=500,null=True, blank=True)
     publish = models.NullBooleanField(default=True)
-    sorting = models.IntegerField(default=100)
+    sorting = models.IntegerField(default=1,null=True, blank=True)
 
     class Meta:
         verbose_name = "Office"
@@ -213,16 +214,15 @@ class Office(models.Model):
 #-------------------------------------------------------------
 class Project(models.Model):
     title = models.CharField(max_length=255, help_text="Name Of Project")
-    Country = CountryField(default='null')
     slug = models.SlugField(unique=True, editable=False, null=True, blank=True) # hide from admin
-    keyword = models.TextField(max_length=500,null=True, blank=True)
+    keyword = models.TextField(max_length=1000,null=True, blank=True)
     project_type = models.ManyToManyField(Project_Type_List, related_name='project_type', help_text="Project's Type")
     
     thumbnail = models.ImageField(upload_to = get_project_directory_upload_path, help_text='Mandatory, will be shown as all project thumbnails', null=True, blank=False, max_length=250)
     
     publish = models.NullBooleanField(default=True)
     show_on_main = models.NullBooleanField(default=False, help_text='Show On Main Page')
-    sorting = models.IntegerField(null=True, blank=True)
+    sorting = models.IntegerField(default=1,null=True, blank=True)
     create_at = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, editable=False)
     update_at = models.DateTimeField(auto_now=True, auto_now_add=False, null=True, editable=False)
 
@@ -256,7 +256,7 @@ class Project_Content(models.Model):
     
     row_style = models.CharField(max_length=100, choices=CONTENT_ROW_STYLE, default='span_full_width', help_text="Row Content Layout Style, Only will have affect if right content empty.")
 
-    sorting = models.IntegerField(default=100)
+    sorting = models.IntegerField(default=1,null=True, blank=True)
     
     def save(self, *args, **kwargs):
         imp = custom_function.ImageProcessor()
@@ -287,7 +287,7 @@ class Trend(models.Model):
     thumbnail_font_hex_color = models.CharField(max_length=50, null=True, blank=True, help_text="Font color in hex, ie: #ffffff. To be displayed for font text overlapping slideshows, Defaulted to white.")
 
     publish = models.NullBooleanField(default=True)
-    sorting = models.IntegerField(null=True, blank=True)
+    sorting = models.IntegerField(default=1,null=True, blank=True)
     create_at = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, editable=False)
     update_at = models.DateTimeField(auto_now=True, auto_now_add=False, null=True, editable=False)
 
@@ -321,7 +321,7 @@ class Trend_Content(models.Model):
     
     row_style = models.CharField(max_length=100, choices=CONTENT_ROW_STYLE, default='half_align_left', help_text="Row Content Layout Style, Only will have affect if right content empty.")
 
-    sorting = models.IntegerField(default=100)
+    sorting = models.IntegerField(default=1,null=True, blank=True)
     
     def save(self, *args, **kwargs):
         imp = custom_function.ImageProcessor()
