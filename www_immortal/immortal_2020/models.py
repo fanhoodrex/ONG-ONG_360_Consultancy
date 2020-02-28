@@ -5,24 +5,31 @@ import sys, os
 
 
 #django-countries
-#-------------------------------------------------------------
+
 from django_countries.fields import CountryField
 
 #django-uuslug
-#-------------------------------------------------------------
+
 from uuslug import uuslug
 
 # django-tinymce
-#-------------------------------------------------------------
+
 from tinymce.models import HTMLField
 
 # Snippets
-#-------------------------------------------------------------
+
 def get_project_directory_upload_path(instance, filename):
     return os.path.join("project", "%s" % instance.slug, filename)
-
+    
 def get_trend_directory_upload_path(instance, filename):
     return os.path.join("trend", "%s" % instance.slug, filename)
+
+def get_projectcontent_directory_upload_path(instance, filename):
+    return os.path.join("project", "%s" % instance.project_id.slug, filename)
+
+def get_trendcontent_directory_upload_path(instance, filename):
+    return os.path.join("trend", "%s" % instance.trend_id.slug, filename)
+
 
 def has_changed(instance, field):
     try:
@@ -34,12 +41,9 @@ def has_changed(instance, field):
     except:
         custom_function.logger(sys._getframe().f_code.co_name, sys.exc_info(), fileName=os.path.split(sys._getframe().f_code.co_filename)[1])
     return False
-#-------------------------------------------------------------
-
-
 
 # Option / Listing
-#-------------------------------------------------------------
+
 PAGE_CHOICES = (
     ('1','Main Page'),
     ('2','Work'),
@@ -59,11 +63,12 @@ CONTENT_ROW_STYLE = (
     ('span_align_center','Span Row Content Align Center'),
     ('span_align_left','Span Row Content Align Left'),
     ('half_align_left','Content Align Left'),
+    ('half_align_right','Content Align Right')
 )
 
 class Project_Type_List(models.Model):
     title = models.CharField(max_length=150, null=False, blank=False)
-    sorting = models.IntegerField(default=1,null=True, blank=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
     publish = models.NullBooleanField(default=True)
 
     class Meta:
@@ -74,9 +79,10 @@ class Project_Type_List(models.Model):
     def __str__(self):
         return self.title
 
+
 class Service_Scope_List(models.Model):
     title = HTMLField(max_length=150, null=False, blank=False)
-    sorting = models.IntegerField(default=1,null=True, blank=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
     publish = models.NullBooleanField(default=True)
     
     class Meta:
@@ -86,11 +92,8 @@ class Service_Scope_List(models.Model):
 
     def __str__(self):
         return self.title
-#-------------------------------------------------------------
 
 
-# Basic / Setting
-#-------------------------------------------------------------
 class Setting(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=500,null=True, blank=True)
@@ -106,13 +109,14 @@ class Setting(models.Model):
 
     def __str__(self):
         return self.name
+ 
 
 class Group_Company(models.Model):
     name = models.CharField(max_length=255)
     url = models.URLField(max_length=255, null=True, blank=True, help_text="")
     icon = models.FileField(upload_to='group_company_icon/')
     publish = models.NullBooleanField(default=True)
-    sorting = models.IntegerField(default=1,null=True, blank=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
 
     class Meta:
         verbose_name = 'Group Company'
@@ -138,7 +142,7 @@ class Social_Media(models.Model):
     name = models.CharField(max_length=255)
     url = models.URLField(max_length=255, null=True, blank=True, help_text="")
     icon = models.FileField(upload_to='social_media_icon/',blank=True, null=True)
-    sorting = models.IntegerField(default=1,null=True, blank=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
     publish = models.NullBooleanField(default=True)
 
     class Meta:
@@ -148,6 +152,7 @@ class Social_Media(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Pdpa(models.Model):
     name = models.CharField(max_length=255)
@@ -159,15 +164,17 @@ class Pdpa(models.Model):
         verbose_name = 'PDPA'
         verbose_name_plural = 'PDPA'
 
+
 class Disclaimer(models.Model):
     name = models.CharField(max_length=255)
     body_text = HTMLField()
     publish = models.NullBooleanField(default=True)
-    sorting = models.IntegerField(default=1,null=True, blank=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
 
     class Meta:
         verbose_name = 'Disclaimer'
         verbose_name_plural = 'Disclaimer'
+
 
 class Header_Title_Keyword_Setting(models.Model):
     page = models.CharField(max_length=100, choices=PAGE_CHOICES, default='1', help_text="Display This Header or Keyword On Which Page")
@@ -183,8 +190,7 @@ class Header_Title_Keyword_Setting(models.Model):
     def __str__(self):
         return self.title
 
-# Office / Contact
-#-------------------------------------------------------------
+
 class Office(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, editable=False, null=True, blank=True) # hide from admin
@@ -194,7 +200,7 @@ class Office(models.Model):
     country = CountryField(max_length=85,null=False)
     google_map = models.URLField(max_length=500,null=True, blank=True)
     publish = models.NullBooleanField(default=True)
-    sorting = models.IntegerField(default=1,null=True, blank=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
 
     class Meta:
         verbose_name = "Office"
@@ -207,14 +213,12 @@ class Office(models.Model):
 
     def __str__(self):
         return self.title
-#-------------------------------------------------------------
 
 
-# Project
-#-------------------------------------------------------------
 class Project(models.Model):
     title = models.CharField(max_length=255, help_text="Name Of Project")
     slug = models.SlugField(unique=True, editable=False, null=True, blank=True) # hide from admin
+    Country = CountryField(blank=True,null=False, help_text="Project's Country")
     keyword = models.TextField(max_length=1000,null=True, blank=True)
     project_type = models.ManyToManyField(Project_Type_List, related_name='project_type', help_text="Project's Type")
     
@@ -222,7 +226,7 @@ class Project(models.Model):
     
     publish = models.NullBooleanField(default=True)
     show_on_main = models.NullBooleanField(default=False, help_text='Show On Main Page')
-    sorting = models.IntegerField(default=1,null=True, blank=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
     create_at = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, editable=False)
     update_at = models.DateTimeField(auto_now=True, auto_now_add=False, null=True, editable=False)
 
@@ -243,20 +247,21 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
+
 class Project_Content(models.Model):
     project_id = models.ForeignKey(Project, blank=False,on_delete=models.CASCADE)
-
+    
     left_title  = models.CharField(max_length=255, null=True, blank=True)
-    left_image = models.ImageField(upload_to = get_project_directory_upload_path, null=True, blank=True)
+    left_image = models.ImageField(upload_to = get_projectcontent_directory_upload_path, null=True, blank=True)
     left_body_text = HTMLField(null=True, blank=True)
 
     right_title = models.CharField(max_length=255, null=True, blank=True)
-    right_image = models.ImageField(upload_to = get_project_directory_upload_path, null=True, blank=True)
+    right_image = models.ImageField(upload_to = get_projectcontent_directory_upload_path, null=True, blank=True)
     right_body_text = HTMLField(null=True, blank=True)
     
     row_style = models.CharField(max_length=100, choices=CONTENT_ROW_STYLE, default='span_full_width', help_text="Row Content Layout Style, Only will have affect if right content empty.")
 
-    sorting = models.IntegerField(default=1,null=True, blank=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
     
     def save(self, *args, **kwargs):
         imp = custom_function.ImageProcessor()
@@ -271,11 +276,8 @@ class Project_Content(models.Model):
         verbose_name = 'Poject Row Content'
         verbose_name_plural = 'Poject Row Content'
         ordering = ['sorting']
-#-------------------------------------------------------------
 
 
-# Trend
-#-------------------------------------------------------------
 class Trend(models.Model):
     title = models.CharField(max_length=255, help_text="Trend Title")
     slug = models.SlugField(unique=True, editable=False, null=True, blank=True) # hide from admin
@@ -287,7 +289,7 @@ class Trend(models.Model):
     thumbnail_font_hex_color = models.CharField(max_length=50, null=True, blank=True, help_text="Font color in hex, ie: #ffffff. To be displayed for font text overlapping slideshows, Defaulted to white.")
 
     publish = models.NullBooleanField(default=True)
-    sorting = models.IntegerField(default=1,null=True, blank=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
     create_at = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, editable=False)
     update_at = models.DateTimeField(auto_now=True, auto_now_add=False, null=True, editable=False)
 
@@ -308,20 +310,22 @@ class Trend(models.Model):
     def __str__(self):
         return self.title
 
+
 class Trend_Content(models.Model):
     trend_id = models.ForeignKey(Trend, blank=False,on_delete=models.CASCADE)
+    slug = models.SlugField(unique=True, editable=False, null=True, blank=True) # hide from admin
 
     left_title  = models.CharField(max_length=255, null=True, blank=True)
-    left_image = models.ImageField(upload_to = get_trend_directory_upload_path, null=True, blank=True)
+    left_image = models.ImageField(upload_to = get_trendcontent_directory_upload_path, null=True, blank=True)
     left_body_text = HTMLField(null=True, blank=True)
 
     right_title = models.CharField(max_length=255, null=True, blank=True)
-    right_image = models.ImageField(upload_to = get_trend_directory_upload_path, null=True, blank=True)
+    right_image = models.ImageField(upload_to = get_trendcontent_directory_upload_path, null=True, blank=True)
     right_body_text = HTMLField(null=True, blank=True)
     
     row_style = models.CharField(max_length=100, choices=CONTENT_ROW_STYLE, default='half_align_left', help_text="Row Content Layout Style, Only will have affect if right content empty.")
 
-    sorting = models.IntegerField(default=1,null=True, blank=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
     
     def save(self, *args, **kwargs):
         imp = custom_function.ImageProcessor()
@@ -336,4 +340,4 @@ class Trend_Content(models.Model):
         verbose_name = 'Trend Row Content'
         verbose_name_plural = 'Trend Row Content'
         ordering = ['sorting']
-#-------------------------------------------------------------
+
