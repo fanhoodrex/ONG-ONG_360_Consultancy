@@ -66,18 +66,16 @@ admin.site.register(Trend_Content, Trend_Content_Admin)
 
 from .models import Project,Trend
 
-class ProjectInline(admin.StackedInline):
+class ProjectInline(admin.TabularInline):
     model = Project_Content # referenceto project content model
-    pass
-
+    
 class Project_Admin(admin.ModelAdmin): # create admin in a separate form for project
     list_display = ('title','Country','sorting') # Fields to display in project admin section
     inlines = [ProjectInline]
-    pass
-
+    
 admin.site.register(Project, Project_Admin)
 
-class TrendInline(admin.StackedInline):
+class TrendInline(admin.TabularInline):
     model = Trend_Content # referenceto project content model
     pass
 

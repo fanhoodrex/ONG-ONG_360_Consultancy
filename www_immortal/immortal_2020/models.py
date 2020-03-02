@@ -3,17 +3,13 @@ from django.core.files import File
 from immortal_2020 import custom_function
 import sys, os
 
-
 #django-countries
-
 from django_countries.fields import CountryField
 
 #django-uuslug
-
 from uuslug import uuslug
 
 # django-tinymce
-
 from tinymce.models import HTMLField
 
 # Snippets
@@ -221,9 +217,7 @@ class Project(models.Model):
     Country = CountryField(blank=True,null=False, help_text="Project's Country")
     keyword = models.TextField(max_length=1000,null=True, blank=True)
     project_type = models.ManyToManyField(Project_Type_List, related_name='project_type', help_text="Project's Type")
-    
     thumbnail = models.ImageField(upload_to = get_project_directory_upload_path, help_text='Mandatory, will be shown as all project thumbnails', null=True, blank=False, max_length=250)
-    
     publish = models.NullBooleanField(default=True)
     show_on_main = models.NullBooleanField(default=False, help_text='Show On Main Page')
     sorting = models.IntegerField(default=100,null=True, blank=True)
@@ -247,14 +241,12 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
-
 class Project_Content(models.Model):
     project_id = models.ForeignKey(Project, blank=False,on_delete=models.CASCADE)
     
     left_title  = models.CharField(max_length=255, null=True, blank=True)
     left_image = models.ImageField(upload_to = get_projectcontent_directory_upload_path, null=True, blank=True)
     left_body_text = HTMLField(null=True, blank=True)
-
     right_title = models.CharField(max_length=255, null=True, blank=True)
     right_image = models.ImageField(upload_to = get_projectcontent_directory_upload_path, null=True, blank=True)
     right_body_text = HTMLField(null=True, blank=True)
