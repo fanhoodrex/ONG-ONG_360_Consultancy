@@ -13,17 +13,20 @@ from immortal_2020 import custom_function
 class IndexView(TemplateView):
     def get(self, request, **kwargs):
         try:
+            from .models import Project
+            projects = Project.objects.filter(publish='1').order_by('id').values('title','slug','Country','project_type','thumbnail')
+
             return render(
                     request,
                     'index.html',
                     context={ 
                             'page_type':"Index",
-                            'page_title':"",
-                            },
-                    )
+                            'page_title':projects['title'],
+                            'prjects':projects                      
+                    })
         except:
             custom_function.logger(sys._getframe().f_code.co_name, sys.exc_info(), className = self.__class__.__name__, fileName=os.path.split(sys._getframe().f_code.co_filename)[1])
-        raise Http404
+        raise Http404("Unable to access the project")
 #-------------------------------------------------------------
 
 # Disclaimer
@@ -48,6 +51,27 @@ class DisclaimerView(TemplateView):
         raise Http404
 #-------------------------------------------------------------
 
+class ProjectDetailView(TemplateView):
+    def get(self, request, **kwargs):
+        try:
+            from .models import Project_Content
+            projects = Project.objects.filter(publish='1').order_by('id').values('title','slug','keyword','Country','project_type','thumbnail')
+            Project_Content = Project_Content.objects.filter(publish__exact='1').order_by('id').values('name','body_text').last()
+
+            return render(
+                    request,
+                    'project.html',
+                    context={ 
+                            'project':projects['title'],
+                            'project_type':projects['project_type'],
+                            'project_keyword':project['keyword']
+
+                            },
+                    )
+        except:
+            custom_function.logger(sys._getframe().f_code.co_name, sys.exc_info(), className = self.__class__.__name__, fileName=os.path.split(sys._getframe().f_code.co_filename)[1])
+        raise Http404
+
 # Pdpa
 #-------------------------------------------------------------
 class PdpaView(TemplateView):
@@ -70,95 +94,115 @@ class PdpaView(TemplateView):
             custom_function.logger(sys._getframe().f_code.co_name, sys.exc_info(), className = self.__class__.__name__, fileName=os.path.split(sys._getframe().f_code.co_filename)[1])
         return redirect('http://www.group.ong-ong.com/pdpa')
 #-------------------------------------------------------------
+class OfficeView(TemplateView):
+    def get(self, request, **kwargs):
+        try:
+            from .models import Office
+            Office = Office.objects.filter(publish__exact='1').order_by('id').values('name','body_text').last()
 
+            return render(
+                    request,
+                    'contact.html',
+                    context={ 
+                            'page_type':Office['name'],
+                            'page_title':Office['name'],
+                            'body_text':Office['body_text'],
+                            },
+                    )
+        except:
+            custom_function.logger(sys._getframe().f_code.co_name, sys.exc_info(), className = self.__class__.__name__, fileName=os.path.split(sys._getframe().f_code.co_filename)[1])
+        raise Http404
 
-def index(request):
-    try:
-        from .models import index
-        return render(
-            request,
-            "templates/index.html",
-            context = {
-                
-            }
-        )
-    except:
-        pass
+class ContactView(TemplateView):
+    def get(self, request, **kwargs):
+        try:
+            from .models import Service_Scope_List
+            Service_Scope = Service_Scope_List.objects.filter(publish__exact='1').order_by('id').values('name','body_text').last()
 
-def category(request):
-    try:
-        from .models import category
-        return render(
-            request,
-            "templates/category.html",
-            context = {
-                
-            }
-        )
-    except:
-        pass
+            return render(
+                    request,
+                    'scope.html',
+                    context={ 
+                            'page_type':Service_Scope['name'],
+                            'page_title':Service_Scope['name'],
+                            'body_text':Service_Scope['body_text'],
+                            },
+                    )
+        except:
+            custom_function.logger(sys._getframe().f_code.co_name, sys.exc_info(), className = self.__class__.__name__, fileName=os.path.split(sys._getframe().f_code.co_filename)[1])
+        raise Http404
 
-def contact():
-    try:
-        from .models import contact
-        return render(
-            request,
-            "templates/contact.html",
-            context = {
-                
-            }
-        )
-    except:
-        pass
+class ProjectContentView(TemplateView):
+    def get(self, request, **kwargs):
+        try:
+            from .models import Project_Content
+            projects_content = Project.objects.filter(publish__exact='1').order_by('id').values('name','body_text')
 
-def project():
-    try:
-        from .models import project
-        return render(
-            request,
-            "templates/project.html",
-            context = {
-                
-            }
-        )
-    except:
-        pass
+            return render(
+                    request,
+                    'project.html',
+                    context={ 
+                            'page_type':"Index",
+                            'page_title':"",
+                            'prjects_contnet':projects_content                           
+                    })
+        except:
+            custom_function.logger(sys._getframe().f_code.co_name, sys.exc_info(), className = self.__class__.__name__, fileName=os.path.split(sys._getframe().f_code.co_filename)[1])
+            raise Http404()
 
-def scope():
-    try:
-        from .models import scope
-        return render(
-            request,
-            "templates/scope.html",
-            context = {
-                
-            }
-        )
-    except:
-        pass
+class ScopeView(TemplateView):
+    def get(self, request, **kwargs):
+        try:
+            from .models import Service_Scope_List
+            Service_Scope = Service_Scope_List.objects.filter(publish='1').order_by('id').all()
 
-def trend_content():
-    try:
-        from .models import trend_content
-        return render(
-            request,
-            "templates/trend_content.html",
-            context = {
-                
-            }
-        )
-    except:
-        pass
+            context={ 
+                'page_type':'',
+                'scope_titles':Service_Scope.objects.all()
+                }
 
-def trend():
-    try:
-        from .models import trend
-        return render(
-            request,
-            "templates/trend.html",
-            context = {
-                
-            }
-        )  
-    except:
-        pass
+            return render(
+                    request,
+                    'templates/scope.html',
+                    context)
+        except:
+            custom_function.logger(sys._getframe().f_code.co_name, sys.exc_info(), className = self.__class__.__name__, fileName=os.path.split(sys._getframe().f_code.co_filename)[1])
+        raise Http404
+
+class TrendView(TemplateView):
+    def get(self, request, **kwargs):
+        try:
+            from .models import Trend
+            Trend = Trend.objects.filter(publish__exact='1').order_by('id').values('name','body_text').last()
+
+            return render(
+                    request,
+                    'trend.html',
+                    context={ 
+                            'page_type':Trend['name'],
+                            'page_title':Trend['name'],
+                            'body_text':Trend['body_text'],
+                            },
+                    )
+        except:
+            custom_function.logger(sys._getframe().f_code.co_name, sys.exc_info(), className = self.__class__.__name__, fileName=os.path.split(sys._getframe().f_code.co_filename)[1])
+        raise Http404
+
+class TrendContentView(TemplateView):
+    def get(self, request, **kwargs):
+        try:
+            from .models import Trend_Content
+            Trend_Content = Trend_Content.objects.filter(publish__exact='1').order_by('id').values('name','body_text').last()
+
+            return render(
+                    request,
+                    'trend-content.html',
+                    context={ 
+                            'page_type':Trend_Content['name'],
+                            'page_title':Trend_Content['name'],
+                            'body_text':Trend_Content['body_text'],
+                            },
+                    )
+        except:
+            custom_function.logger(sys._getframe().f_code.co_name, sys.exc_info(), className = self.__class__.__name__, fileName=os.path.split(sys._getframe().f_code.co_filename)[1])
+        raise Http404

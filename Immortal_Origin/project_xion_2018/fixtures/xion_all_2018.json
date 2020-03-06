@@ -1,0 +1,930 @@
+[
+{
+  "model": "project_xion_2018.setting",
+  "pk": 1,
+  "fields": {
+    "name": "web_setting_title",
+    "description": "Website tab name, usually website company name",
+    "value": "Project x:ion",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 2,
+  "fields": {
+    "name": "web_setting_footer",
+    "description": "Can be a copyright notice to appear at the bottom of every page. \"%current_year%\" will be substituted with the current year.",
+    "value": "Project X:ion Pte Ltd. All Rights Reserved.",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 3,
+  "fields": {
+    "name": "web_setting_api_google_analytics",
+    "description": "The Google Analytics tracking code, Web Property ID",
+    "value": "UA-",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 4,
+  "fields": {
+    "name": "web_setting_meta_description",
+    "description": "The meta description tag in HTML is the 160 character snippet used to summarize a web page's content. Search engines sometimes use these snippets in search results to let visitors know what a page is about before they click on it.",
+    "value": "ProjectInnovation offers a comprehensive and integrated 360\u00ba approach to design that encompasses urban planning, architecture, landscape, interior, lighting and brand engagement.",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 5,
+  "fields": {
+    "name": "web_setting_meta_keywords",
+    "description": "Meta elements are typically used to specify page description, keywords, author of the document, last modified, and other metadata. The metadata can be used by browsers (how to display content or reload page), search engines (keywords), or other web servic",
+    "value": "ProjectInnovation, Ong-Ong, Ong-Ong Group, Interior Design, Singapore, Ong&Ong, Architecture, Civil and Structural Engineer, c&s engineering, m&e engineering, Mechanical and Electrical Engineer",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 6,
+  "fields": {
+    "name": "web_logo",
+    "description": "Logo for the website. Dimensions should be 307x78",
+    "value": "",
+    "image": "setting/logo_pc.png",
+    "hint": "Project x:ion Logo",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 7,
+  "fields": {
+    "name": "feedback_to_email",
+    "description": "corpcomms@ong-ong.com",
+    "value": "corpcomms@ong-ong.com",
+    "image": "",
+    "hint": "corpcomms@ong-ong.com",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 10,
+  "fields": {
+    "name": "web_setting_api_google_map",
+    "description": "Google map api for office detail page",
+    "value": "https://maps.googleapis.com/maps/api/js?key=AIzaSyCLM6Jnys1KpD6m5u3XXxp4_TQ4G5nUZ80&amp;callback=initMap",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 14,
+  "fields": {
+    "name": "web_setting_background_color",
+    "description": "Background color",
+    "value": "#EAE9E9",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 15,
+  "fields": {
+    "name": "pdpa_title",
+    "description": "Title for PDPA",
+    "value": "Personal Data Protection Act (PDPA) Consent",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 16,
+  "fields": {
+    "name": "pdpa_content",
+    "description": "Content for pdpa",
+    "value": "* In line with the Personal Data Protection Act 2012, by submitting this form, I hereby give my consent to ONG&amp;ONG Group and its subsidiaries to collect, use and disclose my personal data for the purpose of facilitating and contacting me regarding my request(s) via calls, text messages and emails. For the full Personal Data Protection Act, please click <a href=\"http://www.group.ong-ong.com/pdpa\">here</a>.<br>I am aware that I may update the personal data and/or withdraw the consent provided to me at any time by contacting the Data Protection Officer via this form.",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 21,
+  "fields": {
+    "name": "web_logo_mobile",
+    "description": "Mobile Logo for the website. Dimensions should be 229x37",
+    "value": "",
+    "image": "setting/logo_mobile.png",
+    "hint": "Project x:ion Logo",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 22,
+  "fields": {
+    "name": "web_logo_icon",
+    "description": "Icon Logo for the website. favicon",
+    "value": "",
+    "image": "setting/favicon.ico",
+    "hint": "Project x:ion Logo",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 23,
+  "fields": {
+    "name": "web_logo_bg_transparent_main_pc",
+    "description": "Transparent logo use as background image. For computer",
+    "value": "",
+    "image": "setting/logo_transparent.png",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 24,
+  "fields": {
+    "name": "web_logo_bg_transparent_main_mobile",
+    "description": "Transparent logo use as background image. For mobile device",
+    "value": "",
+    "image": "setting/logo_transparent.png",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 25,
+  "fields": {
+    "name": "web_logo_bg_dark",
+    "description": "Dark background with logo use as background image",
+    "value": "",
+    "image": "setting/logo_transparent_dark.png",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 26,
+  "fields": {
+    "name": "web_logo_bg_transparent_project_pc",
+    "description": "Transparent logo use as background image. For computer",
+    "value": "",
+    "image": "setting/logo_multiple.png",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 27,
+  "fields": {
+    "name": "web_logo_bg_transparent_project_mobile",
+    "description": "Transparent logo use as background image. For mobile device",
+    "value": "",
+    "image": "setting/logo_multiple.png",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 28,
+  "fields": {
+    "name": "web_setting_footer_company_link_sticky",
+    "description": "To set footer group company fixed-bottom or not.\r\nTrue = sticky, false = non-sticky",
+    "value": "True",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 29,
+  "fields": {
+    "name": "web_setting_mainpage_content",
+    "description": "Set Value 'None' to only show slidshow on main page\r\nSet Value 'About' if to show slidshow & 'About Us' bar\r\nSet Value 'Project' if to show slidshow & 'Project' section\r\nSet Value 'About;Project' if to show slidshow & 'Project' section & 'About Us' bar",
+    "value": "Project",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 30,
+  "fields": {
+    "name": "web_setting_mainpage_baner_indicators",
+    "description": "The indicators are the little dots at the bottom of each slide.\r\nTrue to enable\r\nFalse to disable",
+    "value": "False",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 31,
+  "fields": {
+    "name": "web_setting_project_page",
+    "description": "Value : To set quantity of project to be show per load, 0 for show all ; \\r\\nHint : To set quantity of project per row (using bootstrap class).",
+    "value": "12",
+    "image": "",
+    "hint": "col-lg-3 col-md-4 col-sm-4 col-xs-12",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 32,
+  "fields": {
+    "name": "web_setting_project_mainpage",
+    "description": "Value : To set quantity of project to be show on Main page, 0 for not showing  ; \r\nHint : To set quantity of project per row (using bootstrap class).",
+    "value": "9999",
+    "image": "",
+    "hint": "col-lg-4 col-md-4 col-sm-6 col-xs-12",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 33,
+  "fields": {
+    "name": "web_setting_scroll_to_top_button",
+    "description": "Scroll button on bottom left, allow user scroll to top when click.\r\nTrue to enable\r\nFalse to disable",
+    "value": "True",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 34,
+  "fields": {
+    "name": "web_setting_mainpage_scroll_down_indicators",
+    "description": "Home Page, A scroll down button (arrow down icon) when click will scroll sown to section bellow.\r\nTrue to Enable\r\nFalse to Disable",
+    "value": "False",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 35,
+  "fields": {
+    "name": "web_setting_scroll_down_indicators_animate",
+    "description": "Animation scroll down button (arrow down icon), up and down .\r\nTrue to Enable\r\nFalse to Disable",
+    "value": "True",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 36,
+  "fields": {
+    "name": "web_setting_project_scroll_down_indicators",
+    "description": "Project Page, A scroll down button (arrow down icon) when click will scroll sown to section bellow.\r\nTrue to Enable\r\nFalse to Disable",
+    "value": "True",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 37,
+  "fields": {
+    "name": "web_setting_menu_list",
+    "description": "List of top menu bar in homepage. \r\n\r\nAbout; to show menu About\r\nProject; to show menu Projects\r\nOffices; to show menu Offices\r\nFeedback; to show menu Feedback\r\nSearch; to show menu Search",
+    "value": "About;Feedback;",
+    "image": "",
+    "hint": "About; Feedback;",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 38,
+  "fields": {
+    "name": "web_setting_carousel_control",
+    "description": "Home Page, A Left & Right button (arrow icon) when click will scroll banner to next or previous slide.\\r\\nTrue = Enable, False = Disable",
+    "value": "False",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 39,
+  "fields": {
+    "name": "web_setting_project_submenu",
+    "description": "This is list of project submenu",
+    "value": "Type",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 40,
+  "fields": {
+    "name": "web_setting_feedback_office",
+    "description": "'True,' to control hide and show of office section in feedback page.\r\n'Show,' to control hide and show mail icon next to office address.",
+    "value": "True,",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 41,
+  "fields": {
+    "name": "web_logo_favicon",
+    "description": "Web logo favicon for Project x:ion",
+    "value": "",
+    "image": "setting/favicon.ico",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.setting",
+  "pk": 42,
+  "fields": {
+    "name": "web_setting_direct_project_url",
+    "description": "This is to configure whether project thumbnail in index page link to project page or not.",
+    "value": "False",
+    "image": "",
+    "hint": "",
+    "publish": true,
+    "font_hex_color": "#ffffff"
+  }
+},
+{
+  "model": "project_xion_2018.list_type",
+  "pk": 1,
+  "fields": {
+    "title": "Commercial",
+    "sorting": 101,
+    "publish": true
+  }
+},
+{
+  "model": "project_xion_2018.list_type",
+  "pk": 2,
+  "fields": {
+    "title": "Residential",
+    "sorting": 109,
+    "publish": true
+  }
+},
+{
+  "model": "project_xion_2018.list_type",
+  "pk": 3,
+  "fields": {
+    "title": "Mixed-use",
+    "sorting": 107,
+    "publish": true
+  }
+},
+{
+  "model": "project_xion_2018.list_type",
+  "pk": 4,
+  "fields": {
+    "title": "Industrial",
+    "sorting": 104,
+    "publish": true
+  }
+},
+{
+  "model": "project_xion_2018.list_type",
+  "pk": 5,
+  "fields": {
+    "title": "Hospitality",
+    "sorting": 103,
+    "publish": true
+  }
+},
+{
+  "model": "project_xion_2018.list_type",
+  "pk": 6,
+  "fields": {
+    "title": "Religious",
+    "sorting": 108,
+    "publish": true
+  }
+},
+{
+  "model": "project_xion_2018.list_type",
+  "pk": 7,
+  "fields": {
+    "title": "Institutional",
+    "sorting": 106,
+    "publish": true
+  }
+},
+{
+  "model": "project_xion_2018.list_type",
+  "pk": 8,
+  "fields": {
+    "title": "Educational",
+    "sorting": 101,
+    "publish": false
+  }
+},
+{
+  "model": "project_xion_2018.list_type",
+  "pk": 9,
+  "fields": {
+    "title": "Infrastructure",
+    "sorting": 105,
+    "publish": true
+  }
+},
+{
+  "model": "project_xion_2018.list_type",
+  "pk": 10,
+  "fields": {
+    "title": "Conservation",
+    "sorting": 102,
+    "publish": true
+  }
+},
+{
+  "model": "project_xion_2018.list_type",
+  "pk": 11,
+  "fields": {
+    "title": "Public Spaces",
+    "sorting": 110,
+    "publish": true
+  }
+},
+{
+  "model": "project_xion_2018.list_feedback_enquiry_type",
+  "pk": 1,
+  "fields": {
+    "type": "Business Opportunities",
+    "publish": true,
+    "sorting": 100,
+    "email_to": null
+  }
+},
+{
+  "model": "project_xion_2018.list_feedback_enquiry_type",
+  "pk": 2,
+  "fields": {
+    "type": "Career Opportunities",
+    "publish": true,
+    "sorting": 102,
+    "email_to": null
+  }
+},
+{
+  "model": "project_xion_2018.list_feedback_enquiry_type",
+  "pk": 3,
+  "fields": {
+    "type": "Data Protection Feedback",
+    "publish": true,
+    "sorting": 103,
+    "email_to": null
+  }
+},
+{
+  "model": "project_xion_2018.list_feedback_enquiry_type",
+  "pk": 4,
+  "fields": {
+    "type": "Others",
+    "publish": true,
+    "sorting": 104,
+    "email_to": null
+  }
+},
+{
+  "model": "project_xion_2018.group_company",
+  "pk": 1,
+  "fields": {
+    "name": "ONG&ONG Group",
+    "url": "http://www.group.ong-ong.com/",
+    "image": "group_company_icon/01_logo_grp.svg",
+    "publish": true,
+    "sorting": 1
+  }
+},
+{
+  "model": "project_xion_2018.group_company",
+  "pk": 2,
+  "fields": {
+    "name": "ONG&ONG",
+    "url": "http://www.ong-ong.com/",
+    "image": "group_company_icon/02_logo_oo.svg",
+    "publish": true,
+    "sorting": 2
+  }
+},
+{
+  "model": "project_xion_2018.group_company",
+  "pk": 3,
+  "fields": {
+    "name": "Rankine&Hill",
+    "url": "http://www.rankine-hill.com/",
+    "image": "group_company_icon/04_logo_rh.svg",
+    "publish": true,
+    "sorting": 3
+  }
+},
+{
+  "model": "project_xion_2018.group_company",
+  "pk": 4,
+  "fields": {
+    "name": "SCA Design",
+    "url": "https://www.sca-design.com/",
+    "image": "group_company_icon/05_logo_sca.svg",
+    "publish": true,
+    "sorting": 4
+  }
+},
+{
+  "model": "project_xion_2018.group_company",
+  "pk": 5,
+  "fields": {
+    "name": "Immortal",
+    "url": "https://www.immortal.com.sg/",
+    "image": "group_company_icon/06_logo_im.svg",
+    "publish": true,
+    "sorting": 5
+  }
+},
+{
+  "model": "project_xion_2018.group_company",
+  "pk": 6,
+  "fields": {
+    "name": "OXD",
+    "url": "https://oxd.ong-ong.com/",
+    "image": "group_company_icon/07_logo_oxd.svg",
+    "publish": true,
+    "sorting": 6
+  }
+},
+{
+  "model": "project_xion_2018.disclaimer",
+  "pk": 1,
+  "fields": {
+    "name": "Disclaimer",
+    "body_text": "<p class=\"font-os-bold\">GENERAL</p>\r\n<p class=\"font-os-regular\">Information found on www.proj-xion.com (the &ldquo;Website) is derived from sources that the Company considers to be reliable, but the Company does not warrant the accuracy, correctness or completeness of any information furnished. The Company makes no express or implied warranties of any manner with regard to the information or services on the Website.&nbsp;<br />All information and materials found or comprised on the Website is for informational purposes only and are not meant to substitute any advice to be provided by the Company on formal engagement of its services.</p>\r\n<p>&nbsp;</p>\r\n<p class=\"font-os-bold\">INTELLECTUAL PROPERTY</p>\r\n<p class=\"font-os-regular\">Information and services found or comprised on the Website are the property of the Company. Visitors to the Website may not reproduce, retransmit, disseminate, sell, distribute, publish, broadcast, circulate or commercially exploit the information or the services found on the Website in any manner without the express written consent of the Company, or use such information or services for any unlawful or unauthorised purpose.&nbsp;<br /><br />Permission is granted to electronically copy and/or print hard copies of pages from the Website solely for the Visitor&rsquo;s own personal non-commercial purposes only. Any other use of the Website or content or information contained therein is strictly prohibited, unless the written permission of the Company is first obtained in writing.</p>\r\n<p>&nbsp;</p>\r\n<p class=\"font-os-bold\">LINKS</p>\r\n<p class=\"font-os-regular\">The Company makes no warranties in relation to any website that site visitors may access directly or indirectly via the Website. Any such external website is independent from the Website, and the Company has no control over, or responsibility with respect to the information provided or activities undertaken by any such external website. A link between the Website and another external website does not mean that the Company endorses that website. Visitors should make their own independent decisions regarding interactions or communications with any external website.&nbsp;<br /><br />No hyperlink to any of the web pages or other content (including text and graphics) comprised on the Website may be made without the express written consent of the Company.</p>\r\n<p>&nbsp;</p>\r\n<p class=\"font-os-bold\">RISKS</p>\r\n<p class=\"font-os-regular\">Due to the nature of the Internet, a Visitor to the Website must acknowledge and accept the risks of the possibility of: (a) unauthorised copying, amendment, recording or reading of or interference with messages or the Website by third parties; (b) delay in or inability to access or use the Website due to any hardware, software, system or connection failure, error, omission, interruption, delay in transmission or computer virus; and (c) loss of data or information that may occur due to any cause whatsoever, including any failure of any electrical, electronic, computer, microprocessor, recording or communication system of the Company or any other party, and the Visitor releases the Company from any claim which the visitor may have as a result of the Visitor assuming such risks.</p>\r\n<p>&nbsp;</p>\r\n<p class=\"font-os-bold\">LAWS</p>\r\n<p class=\"font-os-regular\">These terms of use are governed by the laws of Singapore and the parties submit themselves to the non-exclusive jurisdiction of the Singapore courts.</p>",
+    "publish": true
+  }
+},
+{
+  "model": "project_xion_2018.about_page",
+  "pk": 1,
+  "fields": {
+    "slug": "specialties",
+    "title": "Specialties",
+    "body_text": "<p>From inception through to completion, Project X:ion provides an extensive range of services for the international property and construction industry.</p>\r\n<p>&nbsp;</p>\r\n<p>COST MANAGEMENT</p>\r\n<ul>\r\n<li>\r\n<p>Accurate estimating capabilities</p>\r\n</li>\r\n<li>\r\n<p>Realistic budgets are stringently adhered to, from concept drawings to tender processes and construction</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;&nbsp;</p>\r\n<p>PROJECT MANAGEMENT</p>\r\n<ul>\r\n<li>\r\n<p>The key phases of a project&nbsp;&mdash; initiation and concept, planning and development; construction and execution, handover and evaluation</p>\r\n</li>\r\n<li>\r\n<p>Establish project objectives, undertake an appraisal of the project and document the process in the project plan</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;&nbsp;</p>\r\n<p>DEVELOPMENT MANAGEMENT</p>\r\n<ul>\r\n<li>\r\n<p>Strategic property development and property investment analysis</p>\r\n</li>\r\n<li>\r\n<p>Prepare independent feasibilities and analysis based on development and specific property sectors</p>\r\n</li>\r\n<li>\r\n<p>Manage development processes through local councils and statutory bodies</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>TURN-KEY PROJECTS</p>\r\n<ul>\r\n<li>\r\n<p>One-stop solution for property and construction</p>\r\n</li>\r\n<li>\r\n<p>One point of contact to ensure fluid communication</p>\r\n</li>\r\n</ul>",
+    "image": "",
+    "keyword": "",
+    "image_position": "right",
+    "publish": true,
+    "sorting": 2
+  }
+},
+{
+  "model": "project_xion_2018.about_page",
+  "pk": 3,
+  "fields": {
+    "slug": "about-us",
+    "title": "About Us",
+    "body_text": "<p style=\"margin-bottom: 0in; line-height: 140%;\">Project X: ion is a diverse, multi-disciplined property and construction consultancy. We are current with the systems and regulations pertaining to property and construction, applying our knowledge in tandem with the cultures and processes of countries in and around Asia.</p>\r\n<p style=\"margin-bottom: 0in; line-height: 140%;\">&nbsp;</p>\r\n<p style=\"margin-bottom: 0in; line-height: 140%;\">We understand that a project is about maintaining a synergy between all components. Our services go through a single point of contact ensuring consistency throughout your experience with Project X:ion.</p>\r\n<p style=\"margin-bottom: 0in; line-height: 140%;\">&nbsp;</p>\r\n<p style=\"margin-bottom: 0in; line-height: 140%;\">Keeping abreast of the latest technology advancements, we constantly integrate innovative techniques into our stable of services for a synergistic result.&nbsp;</p>\r\n<p style=\"margin-bottom: 0in; line-height: 140%;\">&nbsp;</p>\r\n<table width=\"100%\" cellspacing=\"0\" cellpadding=\"9\"><colgroup><col width=\"50%\" /><col width=\"50%\" /></colgroup>\r\n<tbody>\r\n<tr>\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" colspan=\"2\" valign=\"top\" width=\"100%\">\r\n<p><strong>Sector Knowledge</strong></p>\r\n</td>\r\n</tr>\r\n<tr valign=\"top\">\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<ul>\r\n<li>Aged Care</li>\r\n</ul>\r\n</td>\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<ul>\r\n<li>Leisure / Recreation</li>\r\n</ul>\r\n</td>\r\n</tr>\r\n<tr valign=\"top\">\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<ul>\r\n<li>Commercial</li>\r\n</ul>\r\n</td>\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<ul>\r\n<li>Public and Government</li>\r\n</ul>\r\n</td>\r\n</tr>\r\n<tr valign=\"top\">\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<ul>\r\n<li>Education</li>\r\n</ul>\r\n</td>\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<ul>\r\n<li>Residential</li>\r\n</ul>\r\n</td>\r\n</tr>\r\n<tr valign=\"top\">\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<ul>\r\n<li>Hotels &amp; Resorts</li>\r\n</ul>\r\n</td>\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<ul>\r\n<li>Retail</li>\r\n</ul>\r\n</td>\r\n</tr>\r\n<tr valign=\"top\">\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<ul>\r\n<li>Industrial / Warehouses</li>\r\n</ul>\r\n</td>\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<ul>\r\n<li>Transport</li>\r\n</ul>\r\n</td>\r\n</tr>\r\n<tr valign=\"top\">\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<ul>\r\n<li>Infrastructure</li>\r\n</ul>\r\n</td>\r\n<td style=\"border: 0px solid #000000; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0.08in;\" width=\"50%\">\r\n<p style=\"margin-left: 0.25in;\" align=\"left\">&nbsp;</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>",
+    "image": "",
+    "keyword": "",
+    "image_position": "left",
+    "publish": true,
+    "sorting": 1
+  }
+},
+{
+  "model": "project_xion_2018.office",
+  "pk": 1,
+  "fields": {
+    "title": "Singapore",
+    "slug": "singapore",
+    "address": "<p>510 Thomson Road<br />#09-00 SLF Building<br />Singapore 298135</p>",
+    "phone": "+65 6278 9588",
+    "fax": "+65 6273 5290",
+    "country": "SG",
+    "image": "",
+    "google_map": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1410.2322215251777!2d103.8389076320225!3d1.332700161931347!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da175b8837e185%3A0xd8598b3d3aa7ac39!2s510+Thomson+Rd%2C+Singapore+298135!5e0!3m2!1sen!2sus!4v1535008095484",
+    "publish": true,
+    "sorting": 101
+  }
+},
+{
+  "model": "project_xion_2018.project",
+  "pk": 90,
+  "fields": {
+    "title": "Alodd",
+    "slug": "alodd",
+    "type": 1,
+    "country": "SG",
+    "body_text": "<p>Alodd</p>",
+    "client_name": null,
+    "site_area": null,
+    "gfa": null,
+    "completion_date": null,
+    "status": null,
+    "publish": true,
+    "enable_on_homepage": true,
+    "sorting": 1,
+    "thumbnail": "project/alodd/2016-05-26_11.thumbnail.jpg",
+    "header_image": "project/alodd/2016-05-26_11.header.jpg",
+    "image1": "",
+    "image2": "",
+    "image3": "",
+    "image4": "",
+    "image5": "",
+    "service": []
+  }
+},
+{
+  "model": "project_xion_2018.project",
+  "pk": 91,
+  "fields": {
+    "title": "Bali International Airport",
+    "slug": "bali-international-airport",
+    "type": 9,
+    "country": "ID",
+    "body_text": "<p>Bali International Airport</p>",
+    "client_name": null,
+    "site_area": null,
+    "gfa": null,
+    "completion_date": null,
+    "status": null,
+    "publish": true,
+    "enable_on_homepage": true,
+    "sorting": 1,
+    "thumbnail": "project/bali-international-airport/DFS_BAli_Airport_1.thumbnail.jpg",
+    "header_image": "project/bali-international-airport/DFS_BAli_Airport_1.header.jpg",
+    "image1": "",
+    "image2": "",
+    "image3": "",
+    "image4": "",
+    "image5": "",
+    "service": []
+  }
+},
+{
+  "model": "project_xion_2018.project",
+  "pk": 92,
+  "fields": {
+    "title": "Howards Storage World",
+    "slug": "howards-storage-world",
+    "type": 10,
+    "country": "SG",
+    "body_text": "<p>Howards Storage World</p>",
+    "client_name": null,
+    "site_area": null,
+    "gfa": null,
+    "completion_date": null,
+    "status": null,
+    "publish": true,
+    "enable_on_homepage": true,
+    "sorting": 1,
+    "thumbnail": "project/howards-storage-world/IMG_1158_Edietd.thumbnail.jpg",
+    "header_image": "project/howards-storage-world/IMG_1158_Edietd.header.jpg",
+    "image1": "",
+    "image2": "",
+    "image3": "",
+    "image4": "",
+    "image5": "",
+    "service": []
+  }
+},
+{
+  "model": "project_xion_2018.project",
+  "pk": 93,
+  "fields": {
+    "title": "Intercontinental Jarkarta",
+    "slug": "intercontinental-jarkarta",
+    "type": 5,
+    "country": "ID",
+    "body_text": "<p>Intercontinental Jarkarta</p>",
+    "client_name": null,
+    "site_area": null,
+    "gfa": null,
+    "completion_date": null,
+    "status": null,
+    "publish": true,
+    "enable_on_homepage": true,
+    "sorting": 1,
+    "thumbnail": "project/intercontinental-jarkarta/IMG-20160810-WA0004.thumbnail.jpg",
+    "header_image": "project/intercontinental-jarkarta/IMG-20160810-WA0004.header.jpg",
+    "image1": "",
+    "image2": "",
+    "image3": "",
+    "image4": "",
+    "image5": "",
+    "service": []
+  }
+},
+{
+  "model": "project_xion_2018.project",
+  "pk": 94,
+  "fields": {
+    "title": "LendLease Marketing Suite",
+    "slug": "lendlease-marketing-suite",
+    "type": 4,
+    "country": "SG",
+    "body_text": "<p>LendLease Marketing Suite</p>",
+    "client_name": null,
+    "site_area": null,
+    "gfa": null,
+    "completion_date": null,
+    "status": null,
+    "publish": true,
+    "enable_on_homepage": true,
+    "sorting": 1,
+    "thumbnail": "project/lendlease-marketing-suite/IMG-20151124-WA0001_Edited.thumbnail.jpg",
+    "header_image": "project/lendlease-marketing-suite/IMG-20151124-WA0001_Edited.header.jpg",
+    "image1": "",
+    "image2": "",
+    "image3": "",
+    "image4": "",
+    "image5": "",
+    "service": []
+  }
+},
+{
+  "model": "project_xion_2018.project",
+  "pk": 95,
+  "fields": {
+    "title": "Swiss Garden Hotel (ongoing)",
+    "slug": "swiss-garden-hotel-ongoing",
+    "type": 5,
+    "country": "MY",
+    "body_text": "<p>A</p>",
+    "client_name": null,
+    "site_area": null,
+    "gfa": null,
+    "completion_date": null,
+    "status": null,
+    "publish": true,
+    "enable_on_homepage": true,
+    "sorting": 0,
+    "thumbnail": "project/swiss-garden-hotel/Swiss_Garden.thumbnail.jpg",
+    "header_image": "project/swiss-garden-hotel/Swiss_Garden.header.jpg",
+    "image1": "",
+    "image2": "",
+    "image3": "",
+    "image4": "",
+    "image5": "",
+    "service": []
+  }
+},
+{
+  "model": "project_xion_2018.feedback",
+  "pk": 1,
+  "fields": {
+    "name": "asdasd",
+    "compname": "",
+    "country_code": "",
+    "area_code": "",
+    "contact": "",
+    "email": "adasdsad@asdasd.asd",
+    "type_enquiry": 1,
+    "description": "asdasdsad",
+    "details_trail": "The client's IP address is private : 10.60.3.133\nHTTP_USER_AGENT : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
+  }
+},
+{
+  "model": "project_xion_2018.page_header_image",
+  "pk": 1,
+  "fields": {
+    "title": "Holistic project management solutions",
+    "keyword": "",
+    "image": "homepage/PIPL_opacity_B.jpg",
+    "project": null,
+    "url": null,
+    "sorting": 101,
+    "publish": false,
+    "font_hex_color": "#ffffff",
+    "font_shadow_css": "1px 1px 5px #000000",
+    "enable_font_shadow": false
+  }
+},
+{
+  "model": "project_xion_2018.page_header_image",
+  "pk": 2,
+  "fields": {
+    "title": "Holistic project management solutions",
+    "keyword": "",
+    "image": "homepage/PIPL_opacity_A.jpg",
+    "project": null,
+    "url": null,
+    "sorting": 102,
+    "publish": false,
+    "font_hex_color": "#ffffff",
+    "font_shadow_css": "1px 1px 5px #000000",
+    "enable_font_shadow": false
+  }
+},
+{
+  "model": "project_xion_2018.page_header_image",
+  "pk": 3,
+  "fields": {
+    "title": "Holistic project management solutions",
+    "keyword": "",
+    "image": "homepage/PIPL_opacity_C.jpg",
+    "project": null,
+    "url": "http://10.25.69.224:8080/project",
+    "sorting": 103,
+    "publish": true,
+    "font_hex_color": "#ffffff",
+    "font_shadow_css": "1px 1px 5px #000000",
+    "enable_font_shadow": false
+  }
+},
+{
+  "model": "project_xion_2018.page_header_image",
+  "pk": 4,
+  "fields": {
+    "title": "Feedback Page Background Image",
+    "keyword": "",
+    "image": "homepage/Contact_us.jpg",
+    "project": null,
+    "url": null,
+    "sorting": 999,
+    "publish": true,
+    "font_hex_color": "#ffffff",
+    "font_shadow_css": "1px 1px 5px #000000",
+    "enable_font_shadow": false
+  }
+}
+]

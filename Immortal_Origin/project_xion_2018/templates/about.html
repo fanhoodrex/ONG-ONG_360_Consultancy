@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block css_block %}{% endblock %}
+
+{% block content_block %}
+    <div class="mobile_title_header mobile_show ">
+        <div class="font-os-semibold">
+            <span>{{page_title}}</span>
+        </div>
+    </div>
+
+    <section id="sec_about_us">
+        <div class="sub_nav">
+            <div class="container about font-os-regular">
+                <div class="row justify-content-center">
+                    <nav>
+                        <ul class="nav">
+                            {% for sub_menu in about_info %}
+                                <li class="nav-item about_sub_menu">
+                                    <a class="subpro nav-link {% if forloop.first %}active{% endif %}" id="home-tab" data-toggle="tab" href="#tab_{{forloop.counter}}" aria-controls="{{sub_menu.title}}" aria-selected="true">
+                                        {{sub_menu.title}}
+                                    </a>
+                                </li>
+                           {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content">
+            {% for tab in about_info %}
+                <div id="tab_{{forloop.counter}}" class="tab-pane fade in {% if forloop.first %}show active{% endif %}" role="tabpanel">
+                    
+                    {% for img_group in tab.image_group  %}
+                        <div class="white_bg" style="{% if img_group.background_hex_color|length > 3 %}background-color:{{img_group.background_hex_color}}{% endif %}">
+                            <div class="container">
+                                <div class="text-center">
+                                    {% if img_group.title %}
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h2 class="font-os-light">{{img_group.title}}</h2>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    <div class="row justify-content-md-center">
+                                        {% with image_odd_even=img_group.image|length|divisibleby:2 %}
+                                        {% for image in img_group.image %}
+                                        <div class="col-md-3 {% if image_odd_even is False and forloop.first %}col-sm-12 col-12{% else %}col-sm-6 col-6{% endif %} ">
+                                            <img class="img-fluid" src="{{image.image.url}}" alt="{{image.title}}" title="{{image.title}}" style="height:150px;width:auto;">
+                                        </div>
+                                        {% endfor %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}   
+                    <div class="container padd-top">
+                        {% if tab.image %}
+                            {% if tab.image_position == "right" %}
+                            <div class="row">
+                                <div class="col-lg-7 col-xs-12">
+                                    {{tab.body_text|safe}}
+                                    
+                                </div>
+                                <div class="col-lg-5 col-xs-12" >
+                                    <p><img class="img-fluid" src="{{tab.image.url}}"/> </p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if tab.image_position == "left" %}
+                            <div class="row">
+                                <div class="col-lg-4 col-xs-12" >
+                                    <p><img class="img-fluid" src="{{tab.image.url}}"/> </p>
+                                </div>
+                                <div class="col-lg-8 col-xs-12 split_list_2 ">
+                                    <div class="leftpadd">
+                                        {{tab.body_text|safe}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% else %}
+                            <div class="row">
+                                <div class="col-lg-12 col-xs-12">
+                                        {{tab.body_text|safe}}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}            
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascript_block %}
+{% endblock %}

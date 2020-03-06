@@ -15,16 +15,16 @@ from tinymce.models import HTMLField
 # Snippets
 
 def get_project_directory_upload_path(instance, filename):
-    return os.path.join("project", "%s" % instance.slug, filename)
+    return os.path.join("project","%s" % instance.slug,filename)
     
 def get_trend_directory_upload_path(instance, filename):
-    return os.path.join("trend", "%s" % instance.slug, filename)
+    return os.path.join("trend","%s" % instance.slug,filename)
 
-def get_projectcontent_directory_upload_path(instance, filename):
-    return os.path.join("project", "%s" % instance.project_id.slug, filename)
+def get_projectcontent_directory_upload_path(instance,filename):
+    return os.path.join("project","%s" % instance.project_id.slug,filename)
 
 def get_trendcontent_directory_upload_path(instance, filename):
-    return os.path.join("trend", "%s" % instance.trend_id.slug, filename)
+    return os.path.join("trend","%s" % instance.trend_id.slug,filename)
 
 
 def has_changed(instance, field):
@@ -332,4 +332,3 @@ class Trend_Content(models.Model):
         verbose_name = 'Trend Row Content'
         verbose_name_plural = 'Trend Row Content'
         ordering = ['sorting']
-

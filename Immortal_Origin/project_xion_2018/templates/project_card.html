@@ -1,0 +1,52 @@
+{% load static %}
+
+{% if projects_list %}
+    {% for project in projects_list %}
+    <div class="{% if show_class %}{{show_class}}{% else %}col-lg-3 col-md-4 col-sm-4 col-xs-12{% endif %} portfolio-item project-card" {% if show_quantity and forloop.counter > show_quantity and show_quantity != 0 %}style="display:none;"{% endif %}>
+        <div class="card h-100">
+            {% if 'True' in web_setting_json.web_setting_direct_project_url %}
+            <a href="/project/{{project.slug}}">
+                <img class="card-img-top" alt="{{project.title}}" src="{% static 'images/blank.png' %}" data-src="{{project.thumbnail.url}}">
+            </a>
+            <div class="card-body">
+                <a href="/project/{{project.slug}}">
+                    <h4 class="card-title font-os-bold">
+                        {{project.title}}
+                    </h4>
+                    <p class="card-text font-os-regular">{{project.country.name}}</p>
+                </a>
+            </div>
+            {% else %}
+            <img class="card-img-top" alt="{{project.title}}" src="{% static 'images/blank.png' %}" data-src="{{project.thumbnail.url}}">
+            <div class="card-body">
+                <h4 class="card-title font-os-bold">
+                    {{project.title}}
+                </h4>
+                <p class="card-text font-os-regular">{{project.country.name}}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>  
+    {% endfor %}
+{% elif 'Index' not in page %}
+    <br/><h3>No Result Found</h3><br/>
+{% endif %}
+
+
+{% if 'Project' in page %}
+    {% if show_quantity and projects_list %}
+        {% if show_quantity < 0 or projects_list|length > show_quantity and show_quantity != 0 %}
+        <div class="col-lg-12 text-center">
+            <br/>
+            <a id="div_load_more" data-quantity="{{show_quantity}}"><img class="img-fluid" src="{% static 'images/plus-circle.png' %}" alt="Load More" title="Load More"></a>
+        </div>
+        {% endif %}
+    {% endif %}
+{% elif 'Index' in page  %}
+    {% if projects_list|length > 0 and 'True' in web_setting_json.web_setting_direct_project_url %}
+        <div class="col-lg-12 text-center">
+            <br/>
+            <button onClick="location.href='/projects';" type="button" class="btn btn-outline-dark  font-os-regular">Explore More</button>
+        </div>
+    {% endif %}
+{% endif %}   
