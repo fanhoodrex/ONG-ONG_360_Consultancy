@@ -15,16 +15,16 @@ from tinymce.models import HTMLField
 # Snippets
 
 def get_project_directory_upload_path(instance, filename):
-    return os.path.join("project","%s" % instance.slug,filename)
+    return os.path.join("project", "%s" % instance.slug, filename)
     
 def get_trend_directory_upload_path(instance, filename):
-    return os.path.join("trend","%s" % instance.slug,filename)
+    return os.path.join("trend", "%s" % instance.slug, filename)
 
-def get_projectcontent_directory_upload_path(instance,filename):
-    return os.path.join("project","%s" % instance.project_id.slug,filename)
+def get_projectcontent_directory_upload_path(instance, filename):
+    return os.path.join("project", "%s" % instance.project_id.slug, filename)
 
 def get_trendcontent_directory_upload_path(instance, filename):
-    return os.path.join("trend","%s" % instance.trend_id.slug,filename)
+    return os.path.join("trend", "%s" % instance.trend_id.slug, filename)
 
 
 def has_changed(instance, field):
@@ -62,6 +62,8 @@ CONTENT_ROW_STYLE = (
     ('half_align_right','Content Align Right')
 )
 
+
+
 class Project_Type_List(models.Model):
     title = models.CharField(max_length=150, null=False, blank=False)
     sorting = models.IntegerField(default=100,null=True, blank=True)
@@ -76,18 +78,7 @@ class Project_Type_List(models.Model):
         return self.title
 
 
-class Service_Scope_List(models.Model):
-    title = HTMLField(max_length=150, null=False, blank=False)
-    sorting = models.IntegerField(default=100,null=True, blank=True)
-    publish = models.NullBooleanField(default=True)
-    
-    class Meta:
-        verbose_name = 'List Service Scope'
-        verbose_name_plural = 'List Service Scope'
-        ordering = ['sorting', 'title']
 
-    def __str__(self):
-        return self.title
 
 
 class Setting(models.Model):
@@ -106,7 +97,6 @@ class Setting(models.Model):
     def __str__(self):
         return self.name
  
-
 class Group_Company(models.Model):
     name = models.CharField(max_length=255)
     url = models.URLField(max_length=255, null=True, blank=True, help_text="")
@@ -150,28 +140,6 @@ class Social_Media(models.Model):
         return self.name
 
 
-class Pdpa(models.Model):
-    name = models.CharField(max_length=255)
-    body_text = HTMLField()
-    url = models.URLField(max_length=255, null=True, blank=True, help_text="If this field is filled up, the footer pdpa url will redirect instead of popup pdpa content from this page")
-    publish = models.NullBooleanField(default=True)
-
-    class Meta:
-        verbose_name = 'PDPA'
-        verbose_name_plural = 'PDPA'
-
-
-class Disclaimer(models.Model):
-    name = models.CharField(max_length=255)
-    body_text = HTMLField()
-    publish = models.NullBooleanField(default=True)
-    sorting = models.IntegerField(default=100,null=True, blank=True)
-
-    class Meta:
-        verbose_name = 'Disclaimer'
-        verbose_name_plural = 'Disclaimer'
-
-
 class Header_Title_Keyword_Setting(models.Model):
     page = models.CharField(max_length=100, choices=PAGE_CHOICES, default='1', help_text="Display This Header or Keyword On Which Page")
     title = models.CharField(max_length=250, null=True, blank=True, help_text='Please type manually, Heading Title To Be Display (If Any)')
@@ -186,31 +154,6 @@ class Header_Title_Keyword_Setting(models.Model):
     def __str__(self):
         return self.title
 
-
-class Office(models.Model):
-    title = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, editable=False, null=True, blank=True) # hide from admin
-    address = HTMLField(null=True, blank=True)
-    phone = models.CharField(max_length=255, null=True, blank=True)
-    email = models.CharField(max_length=255, null=True, blank=True)
-    country = CountryField(max_length=85,null=False)
-    google_map = models.URLField(max_length=500,null=True, blank=True)
-    publish = models.NullBooleanField(default=True)
-    sorting = models.IntegerField(default=100,null=True, blank=True)
-
-    class Meta:
-        verbose_name = "Office"
-        verbose_name_plural = "Offices"
-        ordering = ['sorting','title']
-
-    def save(self, *args, **kwargs):
-        self.slug = uuslug(self.title, instance=self)
-        super(Office, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return self.title
-
-
 class Project(models.Model):
     title = models.CharField(max_length=255, help_text="Name Of Project")
     slug = models.SlugField(unique=True, editable=False, null=True, blank=True) # hide from admin
@@ -219,7 +162,9 @@ class Project(models.Model):
     project_type = models.ManyToManyField(Project_Type_List, related_name='project_type', help_text="Project's Type")
     thumbnail = models.ImageField(upload_to = get_project_directory_upload_path, help_text='Mandatory, will be shown as all project thumbnails', null=True, blank=False, max_length=250)
     publish = models.NullBooleanField(default=True)
+    
     show_on_main = models.NullBooleanField(default=False, help_text='Show On Main Page')
+    
     sorting = models.IntegerField(default=100,null=True, blank=True)
     create_at = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, editable=False)
     update_at = models.DateTimeField(auto_now=True, auto_now_add=False, null=True, editable=False)
@@ -247,6 +192,7 @@ class Project_Content(models.Model):
     left_title  = models.CharField(max_length=255, null=True, blank=True)
     left_image = models.ImageField(upload_to = get_projectcontent_directory_upload_path, null=True, blank=True)
     left_body_text = HTMLField(null=True, blank=True)
+    
     right_title = models.CharField(max_length=255, null=True, blank=True)
     right_image = models.ImageField(upload_to = get_projectcontent_directory_upload_path, null=True, blank=True)
     right_body_text = HTMLField(null=True, blank=True)
@@ -270,16 +216,71 @@ class Project_Content(models.Model):
         ordering = ['sorting']
 
 
+class Disclaimer(models.Model):
+    name = models.CharField(max_length=255)
+    body_text = HTMLField()
+    publish = models.NullBooleanField(default=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Disclaimer'
+        verbose_name_plural = 'Disclaimer'
+
+class Pdpa(models.Model):
+    name = models.CharField(max_length=255)
+    body_text = HTMLField()
+    url = models.URLField(max_length=255, null=True, blank=True, help_text="If this field is filled up, the footer pdpa url will redirect instead of popup pdpa content from this page")
+    publish = models.NullBooleanField(default=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'PDPA'
+        verbose_name_plural = 'PDPA'
+
+class Office(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, editable=False, null=True, blank=True) # hide from admin
+    address = HTMLField(null=True, blank=True)
+    phone = models.CharField(max_length=255, null=True, blank=True)
+    email = models.CharField(max_length=255, null=True, blank=True)
+    country = CountryField(max_length=85,null=False)
+    google_map = models.URLField(max_length=500,null=True, blank=True)
+    publish = models.NullBooleanField(default=True)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Office"
+        verbose_name_plural = "Offices"
+        ordering = ['sorting','title']
+
+    def save(self, *args, **kwargs):
+        self.slug = uuslug(self.title, instance=self)
+        super(Office, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+class Service_Scope_List(models.Model):
+    title = HTMLField(max_length=150, null=False, blank=False)
+    sorting = models.IntegerField(default=100,null=True, blank=True)
+    publish = models.NullBooleanField(default=True)
+    
+    class Meta:
+        verbose_name = 'List Service Scope'
+        verbose_name_plural = 'List Service Scope'
+        ordering = ['sorting', 'title']
+
+    def __str__(self):
+        return self.title
+
 class Trend(models.Model):
     title = models.CharField(max_length=255, help_text="Trend Title")
     slug = models.SlugField(unique=True, editable=False, null=True, blank=True) # hide from admin
     keyword = models.TextField(max_length=255, help_text="Keyword or Sub-Title to be display on list")
     short_description = models.TextField(max_length=500, help_text="Short Description to be display on list")
     date =  models.DateField()
-
     thumbnail = models.ImageField(upload_to = get_trend_directory_upload_path, help_text='Mandatory, will be shown as thumbnails', null=False, blank=False)
     thumbnail_font_hex_color = models.CharField(max_length=50, null=True, blank=True, help_text="Font color in hex, ie: #ffffff. To be displayed for font text overlapping slideshows, Defaulted to white.")
-
     publish = models.NullBooleanField(default=True)
     sorting = models.IntegerField(default=100,null=True, blank=True)
     create_at = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, editable=False)
@@ -301,7 +302,6 @@ class Trend(models.Model):
     
     def __str__(self):
         return self.title
-
 
 class Trend_Content(models.Model):
     trend_id = models.ForeignKey(Trend, blank=False,on_delete=models.CASCADE)
@@ -332,3 +332,4 @@ class Trend_Content(models.Model):
         verbose_name = 'Trend Row Content'
         verbose_name_plural = 'Trend Row Content'
         ordering = ['sorting']
+

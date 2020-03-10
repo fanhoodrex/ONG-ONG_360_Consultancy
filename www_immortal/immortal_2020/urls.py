@@ -5,18 +5,18 @@ from immortal_2020 import views
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^index/$', views.IndexView.as_view()),
-    url(r'^main/$', views.IndexView.as_view()),
-    url(r'^home/$', views.IndexView.as_view()),
-    url(r'^$', views.IndexView.as_view()),
-    url(r'^pdpa/$', views.PdpaView.as_view()),
-    url(r'^disclaimer/$', views.DisclaimerView.as_view()),
+    url(r'^index/$', views.IndexView.as_view(),name="index"),
+    url(r'^main/$', views.IndexView.as_view(),name="index"),
+    url(r'^home/$', views.IndexView.as_view(),name="index"),
+    url(r'^$', views.IndexView.as_view(),name="index"),
+    url(r'^pdpa/$', views.PdpaView.as_view(),name="pdpa"),
+    url(r'^disclaimer/$', views.DisclaimerView.as_view(),name="disclaimer"),
 
-    url(r'^works/(?P<slug>[-\w]+)/$', views.ProjectDetailView.as_view()),
-    url(r'^trends/(?P<slug>[-\w]+)/$', views.TrendView.as_view()),
+    url(r'^works/(?P<slug>[-\w]+)/$', views.ProjectContentView.as_view(),name="works"),
+    url(r'^trends/(?P<slug>[-\w]+)/$', views.TrendView.as_view(),name="trends"),
 
-    url(r'^scope/$', views.ScopeView.as_view()),
-    url(r'^contact/$', views.OfficeView.as_view()),
+    url(r'^scope/$', views.ServiceScopeView.as_view(),name="scope"),
+    url(r'^contact/$', views.OfficeView.as_view(),name="contact"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 """
