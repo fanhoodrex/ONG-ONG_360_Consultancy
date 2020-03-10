@@ -1,0 +1,136 @@
+.carousel-caption p {
+    font-family: "OpenSans-Regular";
+	font-size: 20px;	
+	bottom: 70px;
+	position: absolute;
+}
+
+.carousel-caption {
+    top: 0;
+	bottom: 0;
+    right: 40%;
+    font-weight: normal;
+	text-shadow: 1px 1px 0px rgba(0,0,0, 0.5);
+	z-index: 9999;
+}
+
+.carousel-caption h3 {
+	font-size: 52px;
+	margin-top: 20%;
+}
+
+.split_list_2 {
+    -moz-column-count: 2;
+    -moz-column-gap: 5%;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 5%;
+    column-count: 2;
+    column-gap: 5%;
+
+}
+
+.col-lg-4.col-xs-12.leftpadd {
+    max-width: 100% !important;
+}
+
+.project_submenu{
+    padding-left:0px !important;
+}
+
+@media only screen and (max-width : 660px) {
+    .carousel-caption {
+    right: 10%;
+}
+	
+	.carousel-caption h3 {
+	font-size: 40px;
+}
+
+.split_list_2 {
+    -moz-column-count: 1;
+    -moz-column-gap: 0%;
+    -webkit-column-count: 1;
+    -webkit-column-gap: 0%;
+    column-count: 1;
+    column-gap: 0%;
+}
+
+}
+
+.padd-top {
+    padding-top: 40px;
+}
+
+.leftpadd ul {
+	padding-left: 15px;
+}
+.leftpadd span {
+	font-weight: bold;
+	line-height: 25px;
+	text-transform: uppercase;
+}
+
+.card-title {
+    text-transform: uppercase;
+}
+
+.card span {
+	background-color: #F15625;
+	line-height: 18px;
+	position: absolute;
+	color: #fff;
+	padding: 5px 20px;
+	margin-top: 10px;
+	font-size: 13px;
+}
+
+.topbottom-padd {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.mobile {
+    background-size: 180px !important;
+    height: 35px;
+	margin-left: 12px;
+}
+
+.navbar-brand {
+    width: 200px;
+    background-size: 200px;
+}
+
+.carousel-indicators li {
+	bottom: 40px;
+    border: 3px solid #fff;
+    border-radius: 11px;
+    cursor: pointer;
+    display: inline-block;
+    height: 13px;
+    margin: 1px 15px;
+    text-indent: -999px;
+    width: 13px;
+	background-color: transparent;
+}
+
+.white a {
+	color: #fff;
+}
+
+@media only screen and (max-width : 992px) {
+    .navbar-expand-lg .navbar-nav .nav-link {
+    margin-left: 0px;
+}
+
+.split_list_2 {
+    -moz-column-count: 1;
+    -moz-column-gap: 0%;
+    -webkit-column-count: 1;
+    -webkit-column-gap: 0%;
+    column-count: 1;
+    column-gap: 0%;
+}
+}
+
+
+

@@ -1,0 +1,197 @@
+{% extends "base.html" %}{% load static %}
+
+{% block css_block %}{% endblock %}
+
+{% block content_block %}
+    <div class="mobile_title_header mobile_show ">
+        <div class="font-os-semibold">
+            <span>{{page_title}}</span>
+        </div>
+    </div>
+
+    <section id="sec_project">
+        <div class="sub_nav">
+            <div class="container project font-os-regular">
+                <div class="row">
+                    {% if 'Type' in web_setting_json.web_setting_project_submenu %}
+                    <div class="project_submenu col-md-2 col-xs-12">
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a class="project_sub_menu" data-toggle="collapse" href="#filter_types">Type<span class="bullet">•</span></a></h4>
+                                </div>
+                                <div id="filter_types" class="panel-collapse collapse">
+                                    <button class="filter-button active" data-filter="">All</button>
+                                    {% for item in type_list %}
+                                    <button class="filter-button" data-filter="{{item.title}}">{{item.title}}</button>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if 'Service' in web_setting_json.web_setting_project_submenu %}
+                    <div class="col-md-2 col-xs-12">
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a class="project_sub_menu" data-toggle="collapse" href="#filter_service">Service<span class="bullet">•</span></a></h4>
+                                </div>
+                                <div id="filter_service" class="panel-collapse collapse">
+                                    <button class="filter-button active" data-filter="">All</button>
+                                    {% for item in service_list %}
+                                    <button class="filter-button" data-filter="{{item.title}}">{{item.title}}</button>
+                                    
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if 'Country' in web_setting_json.web_setting_project_submenu %}
+                    {% if country_list %}
+                    <div class="col-md-2 col-xs-12">
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a class="project_sub_menu" data-toggle="collapse" href="#filter_country">Country<span class="bullet">•</span></a></h4>
+                                </div>
+                                <div id="filter_country" class="panel-collapse collapse">
+                                    <button class="filter-button active" data-filter="">All</button>
+                                    
+                                    {% for item in country_list %}
+                                    <button class="filter-button" data-filter="{{item.country}}">{{item.name}}</button>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container padd-top">
+            <div id="div_result_loader" class="row"></div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block javascript_block %}
+    <!-- Disable Image Preload and load before viewpoint --> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/unveil2/2.0.8/jquery.unveil2.min.js" integrity="sha256-B00tEEtJRbA9gas0viRdqVPI81EuZG+kYU978/alKt8=" crossorigin="anonymous"></script>
+
+    <!-- Load More Event --> 
+    <script src="{% static "js/custom.js" %}"></script>
+    <script>        
+        $(document).on('click touchend', '#div_load_more', function () {
+            try {
+                var show_qnt = parseInt($('#div_load_more').data('quantity'));
+                $('.project-card:hidden').slice(0, show_qnt).fadeIn('slow');
+
+                if ($('.project-card:hidden').length == 0) {
+                    $('#div_load_more').html('');
+                }
+
+                $('html, body').animate({
+                    scrollTop: $(window).scrollTop() + 190
+                });
+            } catch (err) { console.log(err); }
+        });
+
+        // Call updateProjectList After page laod
+        $(document).ready(function () {
+           // var getProjList = function () {
+           /*     try {
+                    
+                    var page_type = $('meta[name=page_type]').attr("content");
+                    var type = $('#filter_types > .active').data("filter");
+                    var country = $('#filter_country > .active').data("filter");
+                    var prepareURL = "/project/search?page={0}&type={1}".format(page_type, type, country);
+
+                    updateProjectList(prepareURL);
+                    
+                    $('section>.sub_nav .filter-button').trigger('click');
+
+                    
+                } catch (err) { console.log(err); }
+            };
+          */
+            getProjList();
+        });
+
+        var getProjList = (function () {
+                try {
+                    
+                    var page_type = $('meta[name=page_type]').attr("content");
+                    var type = $('#filter_types > .active').data("filter");
+                    var service = $('#filter_service > .active').data("filter");
+                    var country = $('#filter_country > .active').data("filter");
+                    var prepareURL;
+
+                    if (type != undefined && service == undefined && country == undefined) 
+                        prepareURL = "/project/search?page={0}&type={1}".format(page_type, type);
+                    if (type == undefined && service != undefined && country == undefined) 
+                        prepareURL = "/project/search?page={0}&service={1}".format(page_type, service);
+                    if (type == undefined && service == undefined && country != undefined) 
+                        prepareURL = "/project/search?page={0}&country={1}".format(page_type, country);
+                    if (type != undefined && service != undefined && country == undefined) 
+                        prepareURL = "/project/search?page={0}&type={1}&service={2}".format(page_type, type, service);
+                    if (type != undefined && service == undefined && country != undefined) 
+                        prepareURL = "/project/search?page={0}&type={1}&country={2}".format(page_type, type, country);
+                    if (type == undefined && service != undefined && country != undefined) 
+                        prepareURL = "/project/search?page={0}&service={1}&country={2}".format(page_type, service, country);
+                    if (type != undefined && service != undefined && country != undefined) 
+                        prepareURL = "/project/search?page={0}&type={1}&service={2}&country={3}".format(page_type, type, service, country);
+                    
+                    //var prepareURL = "/project/search?page={0}&type={1}&service={2}&country={3}".format(page_type, type, country);
+
+                    updateProjectList(prepareURL);
+                    
+                   
+
+                    
+                } catch (err) { console.log(err); }
+            });
+        
+    </script>
+
+    <!-- Sub Nav Event & Controller --> 
+    <script>
+        $('section>.sub_nav .filter-button').click(function () {
+            try {
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+                $(this).blur(); 
+
+                /*
+                var page_type = $('meta[name=page_type]').attr("content");
+                
+                var type = $('#filter_types > .active').data("filter");
+        //        var service = $('#filter_service > .active').data("filter");
+                var country = $('#filter_country > .active').data("filter");
+          //      var prepareURL = "/project/search?page={0}&type={1}&service={2}&country={3}".format(page_type, type, service, country);
+                      var prepareURL = "/project/search?page={0}&type={1}".format(page_type, type);
+
+                updateProjectList(prepareURL);
+                */
+                getProjList();
+            } catch (err) { console.log(err); }
+        });
+        
+        var gn_cat_menu_height = 0;
+        var gn_cat_menu_minheight = 100;
+        $('section>.sub_nav .panel-title>a').click(function () {
+            try {
+	            if ($("section>.sub_nav").height() < gn_cat_menu_minheight){
+		            if(gn_cat_menu_height == 0) gn_cat_menu_height = $("section>.sub_nav").height();
+		            $("section>.sub_nav").css('height','auto');
+                }
+            } catch (err) { console.log(err); }
+        });
+    </script>   
+{% endblock %}

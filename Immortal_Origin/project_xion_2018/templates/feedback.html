@@ -1,0 +1,180 @@
+{% extends "base.html" %}{% load static %}
+
+{% block css_block %}{% endblock %}
+
+{% block content_block %}
+
+<section id="feedback" class="padd-top" style="background-image:url('{{homepage_slides.image.url}}');" > 
+
+    <div class="container">
+       <div class="row">
+          <div class="col-lg-6">
+             <h2 class="white font-os-light">Get in touch.</h2>
+             <br>    
+             <form id="form_feedback" name="form_feedback" method="POST" action="/feedback/" enctype="multipart/form-data" novalidate>
+                 {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input name="tf_name" type="text" class="form-control" placeholder="Name*" required min="3" max="100" value="{{feedback_response.tf_name.value}}"> 
+                            <div class="invalid-feedback font-os-regular" {% if feedback_response.tf_name.message|length > 0 %}style="display:block;"{% endif %}> Please provide your name. {{feedback_response.tf_name.message}}</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group"> 
+                            <input name="tf_company" type="text" class="form-control" placeholder="Company Name" value="{{feedback_response.tf_company.value}}"> 
+                            <div class="invalid-feedback font-os-regular" {% if feedback_response.tf_company.message|length > 0 %}style="display:block;"{% endif %}> Company's name is invalid. {{feedback_response.tf_company.message}}</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-4">
+                        <div class="form-group"> 
+                            <input name="tf_co_code" type="text" class="form-control" placeholder="Country Code" value="{{feedback_response.tf_co_code.value}}">  
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-3">
+                        <div class="form-group"> 
+                            <input name="tf_area_code" type="text" class="form-control" placeholder="Area Code" value="{{feedback_response.tf_area_code.value}}">  
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-5">
+                        <div class="form-group"> 
+                            <input name="tf_contact" type="text" class="form-control" placeholder="Contact Number" value="{{feedback_response.tf_contact.value}}">  
+                        </div>
+                    </div>
+                    <div class="col-lg-12" style="margin-top:-15px;">
+                        <div class="form-group"> 
+                            <div class="invalid-feedback font-os-regular" {% if feedback_response.tf_contact.message|length > 0 %}style="display:block;"{% endif %}>Contact is invalid. {{feedback_response.tf_contact.message}}</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input name="tf_email" type="email" class="form-control" placeholder="Email*" required value="{{feedback_response.tf_email.value}}">  
+                            <div class="invalid-feedback" {% if feedback_response.tf_email.message|length > 0 %}style="display:block;"{% endif %}> Please provide your email address. {{feedback_response.tf_email.message}}</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <select name="tf_enquiry_type" class="custom-select form-control" required>
+                                <option disabled selected value=""> Type of Enquiry*</option>
+                                {% for feedback in feedback_list %}
+                                <option value="{{feedback.id}}" {% if feedback.id == feedback_response.tf_enquiry_type.value %}selected{% endif %}> {{feedback.type}}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback" {% if feedback_response.tf_enquiry_type.message|length > 0 %}style="display:block;"{% endif %}> Please select your enquiry type. {{feedback_response.tf_enquiry_type.message}}</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <textarea name="tf_comments" type="text" class="form-control" placeholder="Comments*" rows="5" required style="resize: none;">{{feedback_response.tf_comments.value}}</textarea>
+                            <div class="invalid-feedback" {% if feedback_response.tf_comments.message|length > 0 %}style="display:block;"{% endif %}> Please write your message. {{feedback_response.tf_comments.message}}</div>
+                        </div>    
+                    </div>
+                    <div class="form-check pdpa">
+                        <p><strong>Personal Data Protection Act (PDPA) Consent</strong></p>
+                        <input id="invalidCheck" name="cb_pdpa" type="checkbox" class="form-check-input" required> 
+                        <label for="invalidCheck">
+                            &nbsp;&nbsp;&nbsp;&nbsp; * In line with the Personal Data Protection Act 2012, by submitting this form, I hereby give my consent to ONG&amp;ONG Group and its subsidiaries to collect, use and disclose my personal data for the purpose of facilitating and contacting me regarding my request(s) via calls, text messages and emails. For the full Personal Data Protection Act, please <a href="/pdpa" target="\&quot;feedback_pdpa_url\&quot;">click here</a>.<br><br> I am aware that I may update the personal data and/or withdraw the consent provided to me at any time by contacting the Data Protection Officer via this form.
+                            <br/><br/>
+                            * Mandatory fields
+                        </label>
+                        <div class="invalid-feedback">You must agree with Personal Data Protection Act (PDPA) before submitting. </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12 col-12 text-right"><button class="btn btn-dark send" id ="form_reset" type="reset">RESET</button><button class="btn btn-dark send" type="submit">SEND</button></div>
+                </div>
+
+
+             </form>
+          </div>
+          <!--END FOR ROW--> 
+       </div>
+    </div>
+
+    
+
+</section>
+
+<!--Office section-->
+    {% if 'True,' in web_setting_json.web_setting_feedback_office %} 
+    <section id="office">
+        <div class="mobile_title_header mobile_show ">
+            <div class="font-os-semibold">
+                <span>{{page_title}}</span>
+            </div>
+        </div>
+
+        <section id="sec_office">
+            {% for info in page_info  %}
+            <div class="padd-top padd-bot no-padding-left {% if forloop.counter|divisibleby:2 %}white_bg{% endif %}">
+                <div class="container">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-7 col-sm-7 location-item">
+                                <div class="card">
+                                    {% if info.google_map|length > 10 %}
+                                    <iframe height="260" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="{{info.google_map}}&output=embed"></iframe>
+                                    {% elif info.image|length > 5 %}
+                                    <img class="card-img-top img-fluid" src="{info.image.url}" alt="">
+                                    {% else %}
+                                    <img class="card-img-top img-fluid" src="{% static "images/location.jpg" %}" alt="">
+                                    {% endif %}
+                                </div>
+                                <br>
+                            </div>
+                        
+                            <div class="col-lg-5 col-sm-5">
+                                <h2 class="font-os-light">{{info.title}}<a href="/feedback">{% if 'Show,' in web_setting_json.web_setting_feedback_office %}<img src="{% static "images/email_orange.png" %}" class="offset-1" style="height:30px;"></a>{% endif %}</h2>
+                                {{info.address|safe}}
+                                <p>
+                                    <a href="tel:{{info.phone}}">T {{info.phone}}</a><BR>
+                                    F {{info.fax}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+    </section>
+    {% endif %}
+    <!--End of Office section-->
+{% endblock %}
+
+{% block javascript_block %}
+<script>
+	(function() {
+		'use strict';
+        window.addEventListener('load', function () {
+            
+			var form = document.getElementById('form_feedback');
+			form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                   
+                }
+                if (form.checkValidity() === false) {
+				    event.preventDefault();
+                    event.stopPropagation();
+                 
+                }
+              
+			    form.classList.add('was-validated');
+			}, false);
+		}, false);
+    })();
+
+    $(document).ready(function () {
+        
+        $("#form_feedback").find('input[type=text],textarea,select').filter(':visible:first').focus();
+        
+    });
+
+    $('#form_reset').click(function(){
+            $('#form_feedback')[0].reset();
+    });
+
+</script>
+<script src="{{web_setting_json.web_setting_api_google_map}}" type="text/javascript"></script>
+
+{% endblock %}

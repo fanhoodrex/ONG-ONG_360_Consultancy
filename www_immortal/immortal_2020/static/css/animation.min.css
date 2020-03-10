@@ -1,0 +1,1 @@
+.arrow_down_animated{animation:MoveUpDown 2s linear infinite;position:absolute;left:0;bottom:0}@keyframes MoveUpDown{0%,100%{bottom:10%}70%{bottom:9%}}

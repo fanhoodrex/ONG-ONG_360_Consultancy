@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block css_block %}{% endblock %}
+
+{% block content_block %}
+<section>
+    <div class="mobile_title_header mobile_show ">
+        <div class="font-os-semibold">
+            <span>{{page_title}}</span>
+        </div>
+    </div>
+    
+    <section id="sec_disclaimer">
+	    <div class="container padd-top">
+          <div class="row">
+            <div class="col-lg-12">
+             <h2 class="font-os-light">{{page_title}}</h2>
+                <br><br>
+                {{body_text|safe}}
+            </div>
+          </div>
+        </div>
+    </section>
+</section>
+{% endblock %}
+
+{% block javascript_block %}{% endblock %}

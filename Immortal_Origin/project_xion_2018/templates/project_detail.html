@@ -1,0 +1,113 @@
+{% extends "base.html" %}{% load static %}
+
+{% block css_block %}
+{% if 'True' in web_setting_json.web_setting_scroll_down_indicators_animate %}
+<link href="{% static "css/animation.css" %}" rel="stylesheet">
+{% endif %}
+{% endblock %}
+
+{% block content_block %}
+    <header>
+        <div class="carousel-inner">         
+            <div class="carousel-item active" style="background-image: url('{{project_info.header_image.url}}')"></div>          
+            <div class="logo_multiple desktop" style="background-image: url('/uploads/{{web_logo_json.web_logo_bg_transparent_project_pc}}')"></div> 
+            <div class="logo_multiple mobile_show" style="background-image: url('/uploads/{{web_logo_json.web_logo_bg_transparent_project_mobile}}')"></div> 
+
+            {% if 'True' in web_setting_json.web_setting_project_scroll_down_indicators %}
+                <div class="icon_arrow"><a href="#div_project_detail" id="scroll_to" class="arrow_down_animated"><i class="fa fa-angle-down fa-3x"></i></a></div>
+            {% endif %}
+        </div>
+    </header>
+
+    <div id="div_project_detail" class="container padd-top div_project_detail">
+          <div class="row">
+                <div class="col-lg-5 col-sm-5 pro-detail">
+                    <h4 class="font-os-light">{{project_info.title}}</h4>
+                    <p class="font-os-bold">{{project_info.country.name}}</p>
+
+                    {% if project_info.body_text %}
+                    <div>{{project_info.body_text|safe}}</div>
+                    <hr>
+                    {% endif %}
+
+                    {% if project_info.client_name %}
+                    <p class="font-os-bold">CLIENT</p>
+                    <p>{{project_info.client_name}}</p>
+                    <hr>
+                    {% endif %}
+
+                    {% if project_info.site_area %}
+                    <p class="font-os-bold">SITE AREA</p>
+                    <p>{{project_info.site_area}}</p>
+                    <hr>
+                    {% endif %}
+
+                    {% if project_info.gfa %}
+                    <p class="font-os-bold">Gross Floor Area</p>
+                    <p>{{project_info.gfa}}</p>
+                    <hr>
+                    {% endif %}
+
+                    {% if director_list %}
+                    <p class="font-os-bold">DIRECTOR</p>
+                    <p>{% for director in director_list %}{{director}}{% if forloop.last == False %},&nbsp;{% endif %}{% endfor %}</p>
+                    <hr>
+                    {% endif %}
+                    
+                    {% if service_list %}
+                    <p class="font-os-bold">SERVICES</p>
+                    <p>{% for service in service_list %}{{service.service__title}}{% if forloop.last == False %},&nbsp;{% endif %}{% endfor %}</p>
+                    <hr>
+                    {% endif %}
+
+                    {% if project_info.completion_date %}
+                    <p class="font-os-bold">COMPLETION DATE</p>
+                    <p>{{project_info.completion_date}}</p>
+                    <hr>
+                    {% endif %}
+
+                    {% if project_info.status %}
+                    <p class="font-os-bold">STATUS</p>
+                    <p>{{project_info.status}}</p>
+                    <hr>
+                    {% endif %}
+                </div>
+        
+                <div class="col-lg-7 col-sm-7">
+                    <div class="card">
+                        <div id="project_img" class="flexbin flexbin-margin">
+                            {% if project_info.image1 %}
+                            <img class="card-project-img img-fluid" src="{{project_info.image1.url}}" onerror="this.style.display = 'none'" alt="{{project_info.title}}">
+                            {% endif %}
+
+                            {% if project_info.image2 %}
+                            <img class="card-project-img img-fluid" src="{{project_info.image2.url}}" onerror="this.style.display = 'none'" alt="{{project_info.title}}">
+                            {% endif %}
+
+                            {% if project_info.image3 %}
+                            <img class="card-project-img img-fluid" src="{{project_info.image3.url}}" onerror="this.style.display = 'none'" alt="{{project_info.title}}">
+                            {% endif %}
+
+                            {% if project_info.image4 %}
+                            <img class="card-project-img img-fluid" src="{{project_info.image4.url}}" onerror="this.style.display = 'none'" alt="{{project_info.title}}">
+                            {% endif %}
+
+                            {% if project_info.image5 %}
+                            <img class="card-project-img img-fluid" src="{{project_info.image5.url}}" onerror="this.style.display = 'none'" alt="{{project_info.title}}">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+          </div>
+    </div>
+{% endblock %}
+
+{% block javascript_block %}
+<script>
+    $( document ).ready(function() {
+        if ($('#project_img > img').length == 1) {
+            $('#project_img').removeClass('flexbin');
+        }
+    });
+</script>
+{% endblock %}
